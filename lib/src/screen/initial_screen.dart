@@ -1,3 +1,4 @@
+import 'package:coronator/src/core/color.dart';
 import 'package:flutter/material.dart';
 
 class InitialScreen extends StatelessWidget {
@@ -50,14 +51,12 @@ class InitialScreen extends StatelessWidget {
                         child: Text(
                           "LOGIN",
                         ),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                        ),
                       ),
                       Positioned.fill(
                         child: Material(
                           color: Colors.transparent,
                           child: InkWell(
+                            splashColor: CustomColor.lightCoral,
                             onTap: () =>
                                 Navigator.of(context).pushNamed('/login'),
                           ),
