@@ -26,6 +26,8 @@ class App extends StatelessWidget {
         routes: {
           "/": (context) => InitialScreen(),
           "/login": (context) => LoginScreen(),
+          "/otp": (context) => OtpScreen(),
+          "/timeline": (context) => TimelineScreen(),
         },
       ),
     );

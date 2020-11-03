@@ -79,7 +79,9 @@ class LoginScreen extends StatelessWidget {
                           color: Colors.transparent,
                           child: InkWell(
                             splashColor: CustomColor.lightCoral,
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).pushNamed('/otp');
+                            },
                           ),
                         ),
                       )
