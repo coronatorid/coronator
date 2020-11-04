@@ -163,7 +163,9 @@ class OtpScreen extends StatelessWidget {
                               child: InkWell(
                                 splashColor: CustomColor.lightCoral,
                                 onTap: () {
-                                  Navigator.of(context).pushNamed('/timeline');
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                      '/timeline',
+                                      (Route<dynamic> route) => false);
                                 },
                               ),
                             ),
