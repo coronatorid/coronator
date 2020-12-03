@@ -1,3 +1,4 @@
+import 'package:coronator/src/controller/exporter.dart';
 import 'package:coronator/src/provider/auth_provider.dart';
 import 'package:coronator/src/screen/exporter.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +26,8 @@ class App extends StatelessWidget {
         initialRoute: "/",
         routes: {
           "/": (context) => InitialScreen(),
-          "/login": (context) => LoginScreen(),
-          "/otp": (context) => OtpScreen(),
+          "/login": (context) => LoginController().build(context),
+          "/otp": (context) => OtpController().build(context),
           "/timeline": (context) => TimelineScreen(),
         },
       ),
