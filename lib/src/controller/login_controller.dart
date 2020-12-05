@@ -2,6 +2,7 @@ import 'package:coronator/src/core/api.dart';
 import 'package:coronator/src/interface/login_interface.dart';
 import 'package:coronator/src/provider/login_provider.dart';
 import 'package:coronator/src/screen/login_screen.dart';
+import 'package:coronator/src/serializer/otp_serializer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -22,10 +23,10 @@ class LoginController implements LoginInterface {
     );
   }
 
-  void sendOtp(BuildContext context) {
+  void sendOtp(BuildContext context) async {
     Scaffold.of(context).hideCurrentSnackBar();
 
-    this._sendOtpLock.synchronized(() {
+    this._sendOtpLock.synchronized(() async {
       if (this._sendOtpClicked) {
         return;
       } else {
@@ -49,10 +50,20 @@ class LoginController implements LoginInterface {
           return;
         }
 
+        OTPSerializer otpSerializer = await this._api.auth().requestOTP(
+              context,
+              loginProvider.phoneNumber(),
+            );
+
         loginProvider.setPhoneNumber("");
-        Navigator.of(context).pushNamed('/otp');
-      } catch (e) {
+
+        print(otpSerializer.phoneNumber.toString());
+        print(otpSerializer.sentTime.toString());
+
+        // Navigator.of(context).pushNamed('/otp');
+      } catch (e, backtrace) {
         print("API ERROR: " + e.toString());
+        print("STACKTRACE: " + backtrace.toString());
       } finally {
         this._sendOtpClicked = false;
       }

@@ -22,7 +22,7 @@ class APIBuilder {
     Map<String, dynamic> json = jsonDecode(response.body);
 
     if (responseMapper != null) {
-      return responseMapper.fromJson(json['data']);
+      return responseMapper(json);
     }
 
     return json;

@@ -17,13 +17,13 @@ class AuthAPI {
 
     OTPSerializer otpSerializer = await this._apiBuilder.post(
           context,
-          "/authorizations/request-otp",
+          "/authorization/otp-requests",
           RequestOTPSerializer(
             phoneNumber,
             configProvider.clientUID,
             configProvider.clientSecret,
           ),
-          responseMapper: OTPSerializer,
+          responseMapper: OTPSerializer.fromJson,
         );
 
     return otpSerializer;
