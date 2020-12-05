@@ -1,4 +1,6 @@
+import 'package:http/http.dart' as http;
 import 'package:coronator/src/controller/exporter.dart';
+import 'package:coronator/src/core/api.dart';
 import 'package:coronator/src/provider/auth_provider.dart';
 import 'package:coronator/src/provider/config_provider.dart';
 import 'package:coronator/src/screen/exporter.dart';
@@ -19,6 +21,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    API api = API(http.Client(), this.serverHost);
+
     return MultiProvider(
       providers: [
         Provider(create: (context) => AuthProvider()),
@@ -37,7 +41,7 @@ class App extends StatelessWidget {
         initialRoute: "/",
         routes: {
           "/": (context) => InitialScreen(),
-          "/login": (context) => LoginController().build(context),
+          "/login": (context) => LoginController(api).build(context),
           "/otp": (context) => OtpController().build(context),
           "/timeline": (context) => TimelineScreen(),
         },

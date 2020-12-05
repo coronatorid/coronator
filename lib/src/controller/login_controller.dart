@@ -1,3 +1,4 @@
+import 'package:coronator/src/core/api.dart';
 import 'package:coronator/src/interface/login_interface.dart';
 import 'package:coronator/src/provider/login_provider.dart';
 import 'package:coronator/src/screen/login_screen.dart';
@@ -7,8 +8,12 @@ import 'package:provider/provider.dart';
 import 'package:synchronized/synchronized.dart';
 
 class LoginController implements LoginInterface {
+  final API _api;
+
   Lock _sendOtpLock = Lock();
   bool _sendOtpClicked = false;
+
+  LoginController(this._api);
 
   Widget build(BuildContext context) {
     return Provider(
@@ -46,7 +51,9 @@ class LoginController implements LoginInterface {
 
         loginProvider.setPhoneNumber("");
         Navigator.of(context).pushNamed('/otp');
-      } catch (e) {} finally {
+      } catch (e) {
+        print("API ERROR: " + e.toString());
+      } finally {
         this._sendOtpClicked = false;
       }
     });
