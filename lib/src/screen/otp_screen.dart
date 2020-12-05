@@ -1,11 +1,21 @@
 import 'package:coronator/src/core/color.dart';
+import 'package:coronator/src/interface/otp_interface.dart';
+import 'package:coronator/src/provider/otp_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:provider/provider.dart';
 
-class OtpScreen extends StatelessWidget {
+class OTPScreen extends StatelessWidget {
+  final OTPInterface interface;
+
+  OTPScreen(this.interface);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: Builder(builder: (BuildContext context) {
+      OTPProvider otpProvider =
+          Provider.of<OTPProvider>(context, listen: false);
+
       return SafeArea(
           child: Container(
               padding: EdgeInsets.all(20),
@@ -38,7 +48,9 @@ class OtpScreen extends StatelessWidget {
                       Container(
                         width: 50,
                         child: TextFormField(
-                          onChanged: (String value) {},
+                          onChanged: (String value) {
+                            otpProvider.setOTP(value, 0);
+                          },
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -60,7 +72,9 @@ class OtpScreen extends StatelessWidget {
                       Container(
                         width: 50,
                         child: TextFormField(
-                          onChanged: (String value) {},
+                          onChanged: (String value) {
+                            otpProvider.setOTP(value, 1);
+                          },
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -82,7 +96,9 @@ class OtpScreen extends StatelessWidget {
                       Container(
                         width: 50,
                         child: TextFormField(
-                          onChanged: (String value) {},
+                          onChanged: (String value) {
+                            otpProvider.setOTP(value, 2);
+                          },
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -104,7 +120,9 @@ class OtpScreen extends StatelessWidget {
                       Container(
                         width: 50,
                         child: TextFormField(
-                          onChanged: (String value) {},
+                          onChanged: (String value) {
+                            otpProvider.setOTP(value, 3);
+                          },
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -163,9 +181,7 @@ class OtpScreen extends StatelessWidget {
                               child: InkWell(
                                 splashColor: CustomColor.lightCoral,
                                 onTap: () {
-                                  Navigator.of(context).pushNamedAndRemoveUntil(
-                                      '/timeline',
-                                      (Route<dynamic> route) => false);
+                                  this.interface.submitOTP(context);
                                 },
                               ),
                             ),

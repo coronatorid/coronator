@@ -55,8 +55,6 @@ class LoginController implements LoginInterface {
               loginProvider.phoneNumber(),
             );
 
-        loginProvider.setPhoneNumber("");
-
         print(otpSerializer.phoneNumber.toString());
         print(otpSerializer.sentTime.toString());
 
