@@ -60,7 +60,7 @@ class LoginController implements LoginInterface {
         print(otpSerializer.phoneNumber.toString());
         print(otpSerializer.sentTime.toString());
 
-        // Navigator.of(context).pushNamed('/otp');
+        Navigator.of(context).pushNamed('/otp', arguments: otpSerializer);
       } catch (e, backtrace) {
         print("API ERROR: " + e.toString());
         print("STACKTRACE: " + backtrace.toString());
