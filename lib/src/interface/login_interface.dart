@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
 
-class LoginInterface {
-  void sendOtp(BuildContext context) {}
+abstract class LoginInterface {
+  void sendOtp(BuildContext context);
 }

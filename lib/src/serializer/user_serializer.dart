@@ -1,4 +1,6 @@
-class UserSerializer {
+import 'package:coronator/src/interface/request_interface.dart';
+
+class UserSerializer implements RequestInterface {
   final int id;
   final String phone;
   final DateTime createdAt;
@@ -15,6 +17,7 @@ class UserSerializer {
     );
   }
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       'id': this.id,
