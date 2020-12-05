@@ -1,6 +1,4 @@
-import 'package:flutter/widgets.dart';
-
-class LoginProvider with ChangeNotifier {
+class LoginProvider {
   LoginProvider(this._phoneNumber);
 
   String _phoneNumber;

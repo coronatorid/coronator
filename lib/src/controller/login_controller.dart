@@ -11,7 +11,7 @@ class LoginController implements LoginInterface {
   bool _sendOtpClicked = false;
 
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return Provider(
       create: (context) => LoginProvider(""),
       child: LoginScreen(this),
     );
