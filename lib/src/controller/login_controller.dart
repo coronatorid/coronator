@@ -21,7 +21,11 @@ class LoginController implements LoginInterface {
     Scaffold.of(context).hideCurrentSnackBar();
 
     this._sendOtpLock.synchronized(() {
-      if (this._sendOtpClicked) return;
+      if (this._sendOtpClicked) {
+        return;
+      } else {
+        this._sendOtpClicked = true;
+      }
 
       try {
         LoginProvider loginProvider =
@@ -42,7 +46,9 @@ class LoginController implements LoginInterface {
 
         loginProvider.setPhoneNumber("");
         Navigator.of(context).pushNamed('/otp');
-      } catch (e) {}
+      } catch (e) {} finally {
+        this._sendOtpClicked = false;
+      }
     });
   }
 }
