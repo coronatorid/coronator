@@ -60,8 +60,8 @@ class OTPController implements OTPInterface {
         print("USER: " + loginSerializer.user.toJson().toString());
         print("AUTH: " + loginSerializer.auth.toJson().toString());
 
-        // Navigator.of(context).pushNamedAndRemoveUntil(
-        //     '/timeline', (Route<dynamic> route) => false);
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            '/timeline', (Route<dynamic> route) => false);
       } on APIException catch (e, backtrace) {
         print("API ERROR: " + e.toString());
         print("API STATUS CODE: " + e.statusCode.toString());
