@@ -1,10 +1,20 @@
 import 'package:coronator/src/core/color.dart';
+import 'package:coronator/src/interface/login_interface.dart';
+import 'package:coronator/src/provider/login_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
+  final LoginInterface interface;
+
+  LoginScreen(this.interface);
+
   @override
   Widget build(BuildContext context) {
+    LoginProvider loginProvider =
+        Provider.of<LoginProvider>(context, listen: false);
+
     return Scaffold(body: Builder(builder: (BuildContext context) {
       return SafeArea(
         child: Container(
@@ -32,7 +42,7 @@ class LoginScreen extends StatelessWidget {
                 height: 30,
               ),
               TextFormField(
-                onChanged: (String value) {},
+                onChanged: loginProvider.setPhoneNumber,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -54,7 +64,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                maxLength: 12,
+                maxLength: 11,
                 enableSuggestions: false,
                 maxLines: 1,
                 minLines: 1,
@@ -80,7 +90,7 @@ class LoginScreen extends StatelessWidget {
                           child: InkWell(
                             splashColor: CustomColor.lightCoral,
                             onTap: () {
-                              Navigator.of(context).pushNamed('/otp');
+                              this.interface.sendOtp(context);
                             },
                           ),
                         ),
