@@ -5,11 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
-  final String serverURL;
+  final String serverHost;
+  final String clientUID;
+  final String clientSecret;
 
   App({
     Key key,
-    @required this.serverURL,
+    @required this.serverHost,
+    @required this.clientUID,
+    @required this.clientSecret,
   }) : super(key: key);
 
   @override
