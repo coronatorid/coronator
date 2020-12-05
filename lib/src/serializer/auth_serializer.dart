@@ -12,4 +12,12 @@ class AuthSerializer {
       json['expires_in'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'token': this.token,
+      'scopes': this.scopes,
+      'expires_in': this.expiresIn,
+    };
+  }
 }

@@ -5,11 +5,9 @@ class OTPSerializer {
   OTPSerializer(this.phoneNumber, this.sentTime);
 
   static OTPSerializer fromJson(Map<String, dynamic> json) {
-    Map<String, dynamic> data = json['data'];
-
     return OTPSerializer(
-      data['phone_number'],
-      DateTime.parse(data['sent_time']),
+      json['phone_number'],
+      DateTime.parse(json['sent_time']),
     );
   }
 }

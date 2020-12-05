@@ -13,7 +13,12 @@ class ErrorSerializer {
     List<dynamic> decodedError = json['errors'];
 
     decodedError.forEach((element) {
-      errors.add(ErrorObjectSerializer(element['status'], element['detail']));
+      errors.add(
+        ErrorObjectSerializer(
+          element['status'].toString(),
+          element['detail'],
+        ),
+      );
     });
 
     return ErrorSerializer(errors);

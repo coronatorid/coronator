@@ -7,7 +7,7 @@ class LoginSerializer {
 
   LoginSerializer(this.user, this.auth);
 
-  factory LoginSerializer.fromJson(Map<String, dynamic> json) {
+  static LoginSerializer fromJson(Map<String, dynamic> json) {
     return LoginSerializer(
       UserSerializer.fromJson(json['user']),
       AuthSerializer.fromJson(json['auth']),
