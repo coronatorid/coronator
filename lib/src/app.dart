@@ -23,10 +23,11 @@ class App extends StatelessWidget {
       providers: [
         Provider(create: (context) => AuthProvider()),
         Provider(
-            create: (context) => ConfigProvider(
-                  this.clientUID,
-                  this.clientSecret,
-                )),
+          create: (context) => ConfigProvider(
+            this.clientUID,
+            this.clientSecret,
+          ),
+        ),
       ],
       child: MaterialApp(
         title: 'Coronator',
