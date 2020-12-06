@@ -1,4 +1,5 @@
 import 'package:coronator/src/core/api.dart';
+import 'package:coronator/src/core/api/api_exception.dart';
 import 'package:coronator/src/interface/login_interface.dart';
 import 'package:coronator/src/provider/login_provider.dart';
 import 'package:coronator/src/screen/login_screen.dart';
@@ -59,8 +60,16 @@ class LoginController implements LoginInterface {
         print(otpSerializer.sentTime.toString());
 
         Navigator.of(context).pushNamed('/otp', arguments: otpSerializer);
-      } catch (e, backtrace) {
+      } on APIException catch (e, backtrace) {
+        Scaffold.of(context).hideCurrentSnackBar();
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text(e.error.firstError().detail),
+        ));
+
         print("API ERROR: " + e.toString());
+        print("STACKTRACE: " + backtrace.toString());
+      } catch (e, backtrace) {
+        print("ERROR: " + e.toString());
         print("STACKTRACE: " + backtrace.toString());
       } finally {
         this._sendOtpClicked = false;

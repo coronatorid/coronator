@@ -63,6 +63,11 @@ class OTPController implements OTPInterface {
         Navigator.of(context).pushNamedAndRemoveUntil(
             '/timeline', (Route<dynamic> route) => false);
       } on APIException catch (e, backtrace) {
+        Scaffold.of(context).hideCurrentSnackBar();
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text(e.error.firstError().detail),
+        ));
+
         print("API ERROR: " + e.toString());
         print("API STATUS CODE: " + e.statusCode.toString());
         print("DETAIL: " + e.error.firstError().detail);
