@@ -33,6 +33,13 @@ class AuthProvider with ChangeNotifier {
     return this._sp.getString("USER_CREDENTIALS");
   }
 
+  Future<void> authorize(LoginSerializer loginSerializer) async {
+    this._sp.setString(
+          "USER_CREDENTIALS",
+          jsonEncode(loginSerializer.toJson()),
+        );
+  }
+
   LoginSerializer getLogin() {
     return LoginSerializer.fromJson(
       jsonDecode(this._getUserCredential()),

@@ -1,6 +1,7 @@
 import 'package:coronator/src/core/api.dart';
 import 'package:coronator/src/core/api/api_exception.dart';
 import 'package:coronator/src/interface/otp_interface.dart';
+import 'package:coronator/src/provider/auth_provider.dart';
 import 'package:coronator/src/provider/otp_provider.dart';
 import 'package:coronator/src/screen/otp_screen.dart';
 import 'package:coronator/src/serializer/login_serializer.dart';
@@ -59,6 +60,10 @@ class OTPController implements OTPInterface {
 
         print("USER: " + loginSerializer.user.toJson().toString());
         print("AUTH: " + loginSerializer.auth.toJson().toString());
+
+        AuthProvider authProvider =
+            Provider.of<AuthProvider>(context, listen: false);
+        await authProvider.authorize(loginSerializer);
 
         Navigator.of(context).pushNamedAndRemoveUntil(
             '/timeline', (Route<dynamic> route) => false);

@@ -13,4 +13,11 @@ class LoginSerializer {
       AuthSerializer.fromJson(json['auth']),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "user": this.user.toJson(),
+      "auth": this.auth.toJson(),
+    };
+  }
 }
