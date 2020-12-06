@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:coronator/src/serializer/login_serializer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,5 +31,11 @@ class AuthProvider with ChangeNotifier {
 
   String _getUserCredential() {
     return this._sp.getString("USER_CREDENTIALS");
+  }
+
+  LoginSerializer getLogin() {
+    return LoginSerializer.fromJson(
+      jsonDecode(this._getUserCredential()),
+    );
   }
 }
