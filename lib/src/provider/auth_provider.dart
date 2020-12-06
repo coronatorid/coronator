@@ -1,3 +1,32 @@
 import 'package:flutter/widgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class AuthProvider with ChangeNotifier {}
+class AuthProvider with ChangeNotifier {
+  SharedPreferences _sp;
+
+  void initialize(SharedPreferences sp) {
+    if (sp != null) {
+      this._sp = sp;
+    }
+  }
+
+  bool isLogin() {
+    if (this.isInitialized() == false) {
+      return false;
+    }
+
+    if (this._getUserCredential() == null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  bool isInitialized() {
+    return this._sp != null;
+  }
+
+  String _getUserCredential() {
+    return this._sp.getString("USER_CREDENTIALS");
+  }
+}

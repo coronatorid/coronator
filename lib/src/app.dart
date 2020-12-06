@@ -6,6 +6,8 @@ import 'package:coronator/src/provider/config_provider.dart';
 import 'package:coronator/src/screen/exporter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:synchronized/synchronized.dart';
 
 class App extends StatelessWidget {
   final String serverHost;
@@ -23,9 +25,17 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     API api = API(http.Client(), this.serverHost);
 
+    AuthProvider authProvider = AuthProvider();
+
+    Lock().synchronized(() async {
+      SharedPreferences sp;
+      sp = await SharedPreferences.getInstance();
+      authProvider.initialize(sp);
+    });
+
     return MultiProvider(
       providers: [
-        Provider(create: (context) => AuthProvider()),
+        Provider(create: (context) => authProvider),
         Provider(
           create: (context) => ConfigProvider(
             this.clientUID,
