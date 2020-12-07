@@ -72,7 +72,13 @@ class TimelineScreen extends StatelessWidget {
                 child: ListView(
                   children: [
                     positiveCases(context),
+                    SizedBox(
+                      height: 10,
+                    ),
                     suspectedCases(context),
+                    SizedBox(
+                      height: 10,
+                    ),
                     positiveCases(context),
                   ],
                 ),
