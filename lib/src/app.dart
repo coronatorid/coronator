@@ -1,10 +1,8 @@
-import 'package:coronator/src/controller/initial_controller.dart';
 import 'package:http/http.dart' as http;
 import 'package:coronator/src/controller/exporter.dart';
 import 'package:coronator/src/core/api.dart';
 import 'package:coronator/src/provider/auth_provider.dart';
 import 'package:coronator/src/provider/config_provider.dart';
-import 'package:coronator/src/screen/exporter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -58,7 +56,7 @@ class App extends StatelessWidget {
           "/": (context) => InitialController().build(context),
           "/login": (context) => LoginController(api).build(context),
           "/otp": (context) => OTPController(api).build(context),
-          "/timeline": (context) => TimelineScreen(),
+          "/timeline": (context) => TimelineController().build(context),
         },
       ),
     );

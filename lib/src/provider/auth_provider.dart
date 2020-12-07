@@ -45,6 +45,10 @@ class AuthProvider with ChangeNotifier {
     this.notifyListeners();
   }
 
+  void revoke() async {
+    await this._sp.remove("USER_CREDENTIALS");
+  }
+
   LoginSerializer getLogin() {
     if (this.isLogin() == false) {
       return null;

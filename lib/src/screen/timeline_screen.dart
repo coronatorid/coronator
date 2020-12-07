@@ -1,4 +1,5 @@
 import 'package:coronator/src/core/color.dart';
+import 'package:coronator/src/interface/timeline_interface.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,6 +7,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TimelineScreen extends StatelessWidget {
+  final TimelineInterface interface;
+
+  TimelineScreen(this.interface);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +23,9 @@ class TimelineScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  this.interface.tapLogout(context);
+                },
                 customBorder: CircleBorder(),
                 child: Column(
                   children: [
