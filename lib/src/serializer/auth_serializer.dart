@@ -8,7 +8,7 @@ class AuthSerializer {
   static AuthSerializer fromJson(Map<String, dynamic> json) {
     return AuthSerializer(
       json['token'],
-      json['scope'],
+      json['scopes'],
       json['expires_in'],
     );
   }
