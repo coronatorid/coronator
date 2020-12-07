@@ -8,86 +8,125 @@ import 'package:url_launcher/url_launcher.dart';
 class TimelineScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Builder(builder: (BuildContext context) {
-      return SafeArea(
+    return Scaffold(
+      bottomNavigationBar: BottomAppBar(
         child: Container(
-          padding: EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          height: 75,
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(
-                "Timeline",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Log aktifitas Anda.",
-                    style: TextStyle(
-                      fontFamily: 'Hind',
+              InkWell(
+                onTap: () {},
+                customBorder: CircleBorder(),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 10,
                     ),
-                  ),
-                  InkWell(
-                    onTap: () async {
-                      const phoneNumber = 'tel:112';
-                      if (await canLaunch(phoneNumber)) {
-                        await launch(phoneNumber);
-                      } else {}
-                    },
-                    child: Container(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            FontAwesomeIcons.phone,
-                            size: 15,
-                            color: Colors.blue,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "Hubungi Call Center 112",
-                            style: TextStyle(
-                              fontFamily: 'Hind',
-                              color: Colors.blue,
-                              decoration: TextDecoration.underline,
-                            ),
-                          ),
-                        ],
+                    Container(
+                      height: 40,
+                      width: 40,
+                      padding: EdgeInsets.all(5),
+                      child: Image(
+                        image: AssetImage('assets/images/shutdown.png'),
+                        width: 100,
                       ),
                     ),
-                  )
-                ],
-              ),
-              Divider(),
-              Expanded(
-                child: ListView(
-                  children: [
-                    positiveCases(context),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    suspectedCases(context),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    positiveCases(context),
+                    Text("LOG OUT"),
                   ],
                 ),
               )
             ],
           ),
         ),
-      );
-    }));
+      ),
+      body: Builder(builder: (BuildContext context) {
+        return SafeArea(
+          child: Container(
+            padding: EdgeInsets.only(
+              left: 20,
+              right: 20,
+              top: 20,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Timeline",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Log aktifitas Anda.",
+                      style: TextStyle(
+                        fontFamily: 'Hind',
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () async {
+                        const phoneNumber = 'tel:112';
+                        if (await canLaunch(phoneNumber)) {
+                          await launch(phoneNumber);
+                        } else {}
+                      },
+                      child: Container(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              FontAwesomeIcons.phone,
+                              size: 15,
+                              color: Colors.blue,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Hubungi Call Center 112",
+                              style: TextStyle(
+                                fontFamily: 'Hind',
+                                color: Colors.blue,
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Divider(),
+                Expanded(
+                  child: ListView(
+                    children: [
+                      positiveCases(context),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      suspectedCases(context),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      positiveCases(context),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      }),
+    );
   }
 
   Widget suspectedCases(BuildContext context) {
