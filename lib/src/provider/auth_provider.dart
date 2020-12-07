@@ -11,14 +11,18 @@ class AuthProvider with ChangeNotifier {
     if (sp != null) {
       this._sp = sp;
     }
+
+    this.notifyListeners();
   }
 
   bool isLogin() {
     if (this.isInitialized() == false) {
+      print("AUTH NOT INITIALIZED");
       return false;
     }
 
     if (this._getUserCredential() == null) {
+      print("AUTH NOT LOGIN YET");
       return false;
     }
 
@@ -30,17 +34,22 @@ class AuthProvider with ChangeNotifier {
   }
 
   String _getUserCredential() {
-    return this._sp.getString("USER_CREDENTIALS");
+    return this._sp?.getString("USER_CREDENTIALS");
   }
 
   Future<void> authorize(LoginSerializer loginSerializer) async {
-    this._sp.setString(
+    this._sp?.setString(
           "USER_CREDENTIALS",
           jsonEncode(loginSerializer.toJson()),
         );
+    this.notifyListeners();
   }
 
   LoginSerializer getLogin() {
+    if (this.isLogin() == false) {
+      return null;
+    }
+
     return LoginSerializer.fromJson(
       jsonDecode(this._getUserCredential()),
     );

@@ -1,3 +1,4 @@
+import 'package:coronator/src/controller/initial_controller.dart';
 import 'package:http/http.dart' as http;
 import 'package:coronator/src/controller/exporter.dart';
 import 'package:coronator/src/core/api.dart';
@@ -35,7 +36,11 @@ class App extends StatelessWidget {
 
     return MultiProvider(
       providers: [
-        Provider(create: (context) => authProvider),
+        ChangeNotifierProvider(
+          create: (context) {
+            return authProvider;
+          },
+        ),
         Provider(
           create: (context) => ConfigProvider(
             this.clientUID,
@@ -50,7 +55,7 @@ class App extends StatelessWidget {
         ),
         initialRoute: "/",
         routes: {
-          "/": (context) => InitialScreen(),
+          "/": (context) => InitialController().build(context),
           "/login": (context) => LoginController(api).build(context),
           "/otp": (context) => OTPController(api).build(context),
           "/timeline": (context) => TimelineScreen(),
