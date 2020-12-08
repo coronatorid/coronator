@@ -7,6 +7,34 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:synchronized/synchronized.dart';
+import 'package:workmanager/workmanager.dart';
+
+void performBackgroundJob() {
+  Workmanager.executeTask((task, inputData) async {
+    print("START BACKGROUND JOB");
+
+    AuthProvider authProvider = AuthProvider();
+    await Lock().synchronized(() async {
+      SharedPreferences sp;
+      sp = await SharedPreferences.getInstance();
+      authProvider.initialize(sp);
+    });
+
+    API api = API(http.Client(), inputData['server_host']);
+
+    switch (task) {
+      case "locationUpdate":
+        if (authProvider.isLogin() == false) {
+          break;
+        }
+
+        api.track().track(null, 40.932615, 28.9754105);
+        break;
+    }
+
+    return Future.value(true);
+  });
+}
 
 class App extends StatelessWidget {
   final String serverHost;
@@ -23,8 +51,19 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     API api = API(http.Client(), this.serverHost);
-
     AuthProvider authProvider = AuthProvider();
+
+    Workmanager.initialize(
+      performBackgroundJob,
+      isInDebugMode: true,
+    );
+    Workmanager.registerPeriodicTask(
+      "locationUpdateJob",
+      "locationUpdate",
+      inputData: {
+        "server_host": this.serverHost,
+      },
+    );
 
     Lock().synchronized(() async {
       SharedPreferences sp;
@@ -53,10 +92,14 @@ class App extends StatelessWidget {
         ),
         initialRoute: "/",
         routes: {
-          "/": (context) => InitialController().build(context),
+          "/": (context) => InitialController().build(
+                context,
+              ),
           "/login": (context) => LoginController(api).build(context),
           "/otp": (context) => OTPController(api).build(context),
-          "/timeline": (context) => TimelineController().build(context),
+          "/timeline": (context) => TimelineController().build(
+                context,
+              ),
         },
       ),
     );
