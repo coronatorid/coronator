@@ -10,6 +10,13 @@ class OTPScreen extends StatelessWidget {
 
   OTPScreen(this.interface);
 
+  final List<FocusNode> focusNodeList = [
+    FocusNode(),
+    FocusNode(),
+    FocusNode(),
+    FocusNode(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: Builder(builder: (BuildContext context) {
@@ -47,99 +54,19 @@ class OTPScreen extends StatelessWidget {
                     children: [
                       Container(
                         width: 50,
-                        child: TextFormField(
-                          onChanged: (String value) {
-                            otpProvider.setOTP(value, 0);
-                          },
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                            ),
-                            fillColor: CustomColor.maire,
-                            filled: true,
-                            contentPadding: EdgeInsets.all(15),
-                          ),
-                          textAlign: TextAlign.center,
-                          maxLength: 1,
-                          maxLengthEnforced: true,
-                          enableSuggestions: false,
-                          maxLines: 1,
-                          minLines: 1,
-                          style: TextStyle(fontFamily: 'Hind', fontSize: 16),
-                        ),
+                        child: buildOTPField(context, otpProvider, 0, true),
                       ),
                       Container(
                         width: 50,
-                        child: TextFormField(
-                          onChanged: (String value) {
-                            otpProvider.setOTP(value, 1);
-                          },
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                            ),
-                            fillColor: CustomColor.maire,
-                            filled: true,
-                            contentPadding: EdgeInsets.all(15),
-                          ),
-                          textAlign: TextAlign.center,
-                          maxLength: 1,
-                          maxLengthEnforced: true,
-                          enableSuggestions: false,
-                          maxLines: 1,
-                          minLines: 1,
-                          style: TextStyle(fontFamily: 'Hind', fontSize: 16),
-                        ),
+                        child: buildOTPField(context, otpProvider, 1, false),
                       ),
                       Container(
                         width: 50,
-                        child: TextFormField(
-                          onChanged: (String value) {
-                            otpProvider.setOTP(value, 2);
-                          },
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                            ),
-                            fillColor: CustomColor.maire,
-                            filled: true,
-                            contentPadding: EdgeInsets.all(15),
-                          ),
-                          textAlign: TextAlign.center,
-                          maxLength: 1,
-                          maxLengthEnforced: true,
-                          enableSuggestions: false,
-                          maxLines: 1,
-                          minLines: 1,
-                          style: TextStyle(fontFamily: 'Hind', fontSize: 16),
-                        ),
+                        child: buildOTPField(context, otpProvider, 2, false),
                       ),
                       Container(
                         width: 50,
-                        child: TextFormField(
-                          onChanged: (String value) {
-                            otpProvider.setOTP(value, 3);
-                          },
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                            ),
-                            fillColor: CustomColor.maire,
-                            filled: true,
-                            contentPadding: EdgeInsets.all(15),
-                          ),
-                          textAlign: TextAlign.center,
-                          maxLength: 1,
-                          maxLengthEnforced: true,
-                          enableSuggestions: false,
-                          maxLines: 1,
-                          minLines: 1,
-                          style: TextStyle(fontFamily: 'Hind', fontSize: 16),
-                        ),
+                        child: buildOTPField(context, otpProvider, 3, false),
                       ),
                     ],
                   ),
@@ -198,5 +125,41 @@ class OTPScreen extends StatelessWidget {
                 ],
               )));
     }));
+  }
+
+  TextFormField buildOTPField(
+    BuildContext context,
+    OTPProvider otpProvider,
+    int index,
+    bool autoFocus,
+  ) {
+    return TextFormField(
+      onChanged: (String value) {
+        otpProvider.setOTP(value, index);
+
+        if (index + 1 < this.focusNodeList.length) {
+          FocusScope.of(context).requestFocus(this.focusNodeList[index + 1]);
+        }
+      },
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderSide: BorderSide.none,
+        ),
+        fillColor: CustomColor.maire,
+        filled: true,
+        contentPadding: EdgeInsets.all(15),
+        counterText: "",
+      ),
+      autofocus: autoFocus,
+      textAlign: TextAlign.center,
+      maxLength: 1,
+      maxLengthEnforced: true,
+      enableSuggestions: false,
+      maxLines: 1,
+      minLines: 1,
+      focusNode: this.focusNodeList[index],
+      style: TextStyle(fontFamily: 'Hind', fontSize: 16),
+    );
   }
 }
