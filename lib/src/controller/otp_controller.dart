@@ -28,6 +28,10 @@ class OTPController implements OTPInterface {
     );
   }
 
+  void resendOTP(BuildContext context) {
+    Navigator.of(context).pop();
+  }
+
   void submitOTP(BuildContext context) {
     Scaffold.of(context).hideCurrentSnackBar();
 

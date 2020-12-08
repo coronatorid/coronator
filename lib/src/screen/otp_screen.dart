@@ -157,7 +157,9 @@ class OTPScreen extends StatelessWidget {
                             decoration: TextDecoration.underline,
                           ),
                         ),
-                        onTap: () {},
+                        onTap: () {
+                          this.interface.resendOTP(context);
+                        },
                       ),
                     ],
                   ),
