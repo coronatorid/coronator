@@ -15,10 +15,6 @@ void performBackgroundJob() {
     try {
       print("START BACKGROUND JOB");
 
-      const String clientUID = String.fromEnvironment("CLIENT_UID",
-          defaultValue: "default_client_uid");
-      const String clientSecret = String.fromEnvironment("CLIENT_SECRET",
-          defaultValue: "default_client_secret");
       const String serverHost = String.fromEnvironment("SERVER_HOST");
 
       print("COMPLETE GET ENVIRONMENT VARIABLE");
