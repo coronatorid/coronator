@@ -10,12 +10,15 @@ class TrackAPI {
 
   TrackAPI(this._apiBuilder);
 
-  Future<LocationSerializer> track(
-      BuildContext context, double lat, long) async {
-    AuthProvider authProvider = Provider.of<AuthProvider>(
-      context,
-      listen: false,
-    );
+  // CONTEXT CAN BE NULL
+  Future<LocationSerializer> track(BuildContext context, double lat, long,
+      {AuthProvider authProvider}) async {
+    if (authProvider == null) {
+      authProvider = Provider.of<AuthProvider>(
+        context,
+        listen: false,
+      );
+    }
 
     LocationSerializer locationSerializer = await this._apiBuilder.post(
           context,

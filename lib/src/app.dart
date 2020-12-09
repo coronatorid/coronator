@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'package:coronator/src/controller/exporter.dart';
 import 'package:coronator/src/core/api.dart';
@@ -36,13 +37,6 @@ void performBackgroundJob() {
       api = API(http.Client(), serverHost);
       print("API INITIATION COMPLETE");
 
-      ConfigProvider configProvider = ConfigProvider(
-        clientUID,
-        clientSecret,
-      );
-
-      print("CONFIG PROVIDER INITIATION COMPLETE");
-
       switch (task) {
         case "locationUpdate":
           if (authProvider.isLogin() == false) {
@@ -50,24 +44,16 @@ void performBackgroundJob() {
           }
 
           print("START LOCATION UPDATE");
-
-          Builder(builder: (context) {
-            MultiProvider(
-              providers: [
-                ChangeNotifierProvider(create: (context) => authProvider),
-                Provider(create: (context) => configProvider),
-              ],
-              child: Builder(builder: (BuildContext context) {
-                api.track().track(context, 40.8584603, 28.8025043);
-                return;
-              }),
-            ).build(context);
-            return;
-          });
-
+          await api.track().track(
+                null,
+                21.4221475,
+                39.8365865,
+                authProvider: authProvider,
+              );
           break;
       }
 
+      print("TASK COMPLETED");
       return Future.value(true);
     } catch (e, backtrace) {
       print("FAIL TO DO BACKGROUND JOB: " + e.toString());
@@ -97,10 +83,6 @@ class App extends StatelessWidget {
     Workmanager.initialize(
       performBackgroundJob,
       isInDebugMode: true,
-    );
-    Workmanager.registerPeriodicTask(
-      "locationUpdateJob",
-      "locationUpdate",
     );
 
     Lock().synchronized(() async {

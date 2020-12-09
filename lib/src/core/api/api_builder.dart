@@ -4,6 +4,8 @@ import 'package:coronator/src/interface/request_interface.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
+// CONTEXT CAN BE NULL IN THIS CLASS.
+// TODO: REMOVE CONTEXT DEPENDENCIES SINCE IT'S ALSO CALL IN BACKGROUND JOB
 class APIBuilder {
   final http.Client _client;
   final String serverHost;

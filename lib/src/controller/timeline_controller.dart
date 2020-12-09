@@ -4,12 +4,20 @@ import 'package:coronator/src/screen/timeline_screen.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:synchronized/synchronized.dart';
+import 'package:workmanager/workmanager.dart';
 
 class TimelineController implements TimelineInterface {
   Lock _tapLogoutLock = Lock();
   bool _tapLogoutClicked = false;
 
   Widget build(BuildContext context) {
+    Workmanager.registerPeriodicTask(
+      "locationUpdateJob",
+      "locationUpdate",
+      frequency: Duration(minutes: 15),
+      existingWorkPolicy: ExistingWorkPolicy.replace,
+    );
+
     return TimelineScreen(this);
   }
 
