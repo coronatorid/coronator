@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:synchronized/synchronized.dart';
 import 'package:workmanager/workmanager.dart';
 
+// TODO: REFACTORING THIS IN THE FUTURE
 void performBackgroundJob() {
   Workmanager.executeTask((task, inputData) async {
     try {
