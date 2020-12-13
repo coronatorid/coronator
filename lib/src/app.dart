@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:coronator/src/job/tracker_update.dart';
 import 'package:http/http.dart' as http;
 import 'package:coronator/src/controller/exporter.dart';
 import 'package:coronator/src/core/api.dart';
@@ -36,17 +37,7 @@ void performBackgroundJob() {
 
       switch (task) {
         case "locationUpdate":
-          if (authProvider.isLogin() == false) {
-            break;
-          }
-
-          print("START LOCATION UPDATE");
-          await api.track().track(
-                null,
-                21.4221475,
-                39.8365865,
-                authProvider: authProvider,
-              );
+          await TrackerUpdate(authProvider, api).perform();
           break;
       }
 
