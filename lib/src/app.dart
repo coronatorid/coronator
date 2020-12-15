@@ -55,12 +55,14 @@ class App extends StatelessWidget {
   final String serverHost;
   final String clientUID;
   final String clientSecret;
+  final bool workerDebugMode;
 
   App({
     Key key,
     @required this.serverHost,
     @required this.clientUID,
     @required this.clientSecret,
+    @required this.workerDebugMode,
   }) : super(key: key);
 
   @override
@@ -70,7 +72,7 @@ class App extends StatelessWidget {
 
     Workmanager.initialize(
       performBackgroundJob,
-      isInDebugMode: true,
+      isInDebugMode: this.workerDebugMode,
     );
 
     Lock().synchronized(() async {
