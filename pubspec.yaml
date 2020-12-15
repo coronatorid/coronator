@@ -31,7 +31,7 @@ dependencies:
   intl: ^0.16.1
   shared_preferences: "0.5.7"
   workmanager: ^0.2.0
-  location: ^3.1.0
+  geolocator: ^6.1.13
   permission_handler: ^5.0.1+1
 
 dev_dependencies:
