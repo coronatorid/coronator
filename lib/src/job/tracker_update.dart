@@ -1,6 +1,6 @@
 import 'package:coronator/src/core/api.dart';
 import 'package:coronator/src/provider/auth_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:geolocator/geolocator.dart';
 
 class TrackerUpdate {
   final AuthProvider authProvider;
@@ -13,17 +13,20 @@ class TrackerUpdate {
       return;
     }
 
-    if (await Permission.locationAlways.status.isDenied) {
-      print("LOCATION UPDATE FAILED BECAUSE LOCATION STATUS DENIED");
+    if (await Geolocator.checkPermission() ==
+        LocationPermission.deniedForever) {
+      print(
+          "LOCATION UPDATE FAILED BECAUSE LOCATION PERMISSION PERMANENTLY DENIED");
       return;
     }
 
     print("START LOCATION UPDATE");
 
+    Position position = await Geolocator.getCurrentPosition();
     await api.track().track(
           null,
-          21.4221475,
-          39.8365865,
+          position.latitude,
+          position.longitude,
           authProvider: authProvider,
         );
 
