@@ -26,8 +26,8 @@ class LocationSerializer {
     return LocationSerializer(
       json['id'],
       json['user_id'],
-      json['lat'],
-      json['long'],
+      json['lat'].toDouble(),
+      json['long'].toDouble(),
       DateTime.parse(json['created_at']),
       DateTime.parse(json['updated_at']),
     );
