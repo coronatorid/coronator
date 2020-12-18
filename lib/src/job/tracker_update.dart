@@ -13,6 +13,11 @@ class TrackerUpdate {
       return;
     }
 
+    if (await GeolocatorPlatform.instance.isLocationServiceEnabled() == false) {
+      print("LOCATION UPDATE FAILED BECAUSE LOCATION SERVICE DISABLED");
+      return;
+    }
+
     if (await Geolocator.checkPermission() ==
         LocationPermission.deniedForever) {
       print(
