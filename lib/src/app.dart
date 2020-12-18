@@ -24,7 +24,7 @@ void performBackgroundJob() {
       AuthProvider authProvider;
       API api;
 
-      authProvider = AuthProvider();
+      authProvider = AuthProvider(api);
       await Lock().synchronized(() async {
         SharedPreferences sp;
         sp = await SharedPreferences.getInstance();
@@ -68,7 +68,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     API api = API(http.Client(), this.serverHost);
-    AuthProvider authProvider = AuthProvider();
+    AuthProvider authProvider = AuthProvider(api);
 
     Workmanager.initialize(
       performBackgroundJob,

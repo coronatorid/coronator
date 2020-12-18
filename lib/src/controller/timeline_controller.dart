@@ -21,7 +21,7 @@ class TimelineController implements TimelineInterface {
     return TimelineScreen(this);
   }
 
-  void tapLogout(BuildContext context) {
+  Future<void> tapLogout(BuildContext context) async {
     AuthProvider authProvider =
         Provider.of<AuthProvider>(context, listen: false);
 
@@ -33,7 +33,7 @@ class TimelineController implements TimelineInterface {
       }
 
       try {
-        authProvider.revoke();
+        await authProvider.revoke(context);
         Navigator.of(context).pushNamedAndRemoveUntil(
           '/',
           (Route<dynamic> route) => false,

@@ -3,6 +3,7 @@ import 'package:coronator/src/provider/config_provider.dart';
 import 'package:coronator/src/serializer/login_serializer.dart';
 import 'package:coronator/src/serializer/otp_serializer.dart';
 import 'package:coronator/src/serializer/request_login_serializer.dart';
+import 'package:coronator/src/serializer/request_logout_serializer.dart';
 import 'package:coronator/src/serializer/request_otp_serializer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -54,5 +55,14 @@ class AuthAPI {
         );
 
     return loginSerializer;
+  }
+
+  Future<void> logout(BuildContext context, {@required String token}) async {
+    await this._apiBuilder.post(
+          context,
+          "/authorization/logout",
+          RequestLogoutSerializer(token),
+          responseMapper: null,
+        );
   }
 }

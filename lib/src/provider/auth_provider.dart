@@ -1,11 +1,15 @@
 import 'dart:convert';
 
+import 'package:coronator/src/core/api.dart';
 import 'package:coronator/src/serializer/login_serializer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider with ChangeNotifier {
   SharedPreferences _sp;
+  final API api;
+
+  AuthProvider(this.api);
 
   void initialize(SharedPreferences sp) {
     if (sp != null) {
@@ -45,7 +49,14 @@ class AuthProvider with ChangeNotifier {
     this.notifyListeners();
   }
 
-  void revoke() async {
+  Future<void> revoke(BuildContext context) async {
+    try {
+      await this.api.auth().logout(context, token: this.getLogin().auth.token);
+    } catch (e, stacktrace) {
+      print("REVOKE PROCESS ERROR: " + e.toString());
+      print("STACKTRACE: " + stacktrace.toString());
+    }
+
     await this._sp.remove("USER_CREDENTIALS");
   }
 
