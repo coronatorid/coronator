@@ -29,11 +29,7 @@ class ServerException extends APIException {
 class ServerExceptionNoBodies extends APIException {
   static final Map<String, List<dynamic>> defaultJson = {
     "errors": [
-      {
-        "code": 00000,
-        "detail":
-            "Terjadi kesalahan pada server babypath. Sampaikan error ini ke twitter @babypathid."
-      }
+      {"code": 00000, "detail": "Terjadi kesalahan pada server."}
     ],
   };
 
