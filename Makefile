@@ -5,3 +5,6 @@ run:
 
 release:
 	@flutter run --release $(ENV)
+
+build_apk:
+	flutter build apk --split-per-abi --obfuscate --split-debug-info=$(shell pwd)/obfuscation $(ENV)
