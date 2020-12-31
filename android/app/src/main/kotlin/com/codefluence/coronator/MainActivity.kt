@@ -1,4 +1,4 @@
-package com.example.coronator
+package com.codeflunce.coronator
 
 import io.flutter.embedding.android.FlutterActivity
 
