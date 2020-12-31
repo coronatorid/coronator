@@ -2,3 +2,6 @@ ENV = $(shell cat .env | grep '^[A-Z]' | perl -ne 'print "--dart-define=$$_"' | 
 
 run:
 	@flutter run $(ENV)
+
+release:
+	@flutter run --release $(ENV)
