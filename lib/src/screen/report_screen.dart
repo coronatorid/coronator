@@ -74,48 +74,50 @@ class ReportScreen extends StatelessWidget {
                         width: 25,
                       ),
                       Expanded(
-                          child: RichText(
-                              text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: "Sensor semua informasi kecuali ",
-                            style: TextStyle(
-                              fontFamily: 'Hind',
-                              color: Colors.white,
-                            ),
+                        child: RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: "Sensor semua informasi kecuali ",
+                                style: TextStyle(
+                                  fontFamily: 'Hind',
+                                  color: Colors.white,
+                                ),
+                              ),
+                              TextSpan(
+                                text: "nama ",
+                                style: TextStyle(
+                                  fontFamily: 'Hind',
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              TextSpan(
+                                text: "dan ",
+                                style: TextStyle(
+                                  fontFamily: 'Hind',
+                                  color: Colors.white,
+                                ),
+                              ),
+                              TextSpan(
+                                text: "tanggal ",
+                                style: TextStyle(
+                                  fontFamily: 'Hind',
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              TextSpan(
+                                text: "dimana Anda dinyatakan covid.",
+                                style: TextStyle(
+                                  fontFamily: 'Hind',
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
                           ),
-                          TextSpan(
-                            text: "nama ",
-                            style: TextStyle(
-                              fontFamily: 'Hind',
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          TextSpan(
-                            text: "dan ",
-                            style: TextStyle(
-                              fontFamily: 'Hind',
-                              color: Colors.white,
-                            ),
-                          ),
-                          TextSpan(
-                            text: "tanggal ",
-                            style: TextStyle(
-                              fontFamily: 'Hind',
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          TextSpan(
-                            text: "dimana Anda dinyatakan covid.",
-                            style: TextStyle(
-                              fontFamily: 'Hind',
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ))),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -144,34 +146,36 @@ class ReportScreen extends StatelessWidget {
                         width: 25,
                       ),
                       Expanded(
-                          child: RichText(
-                              text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text:
-                                "Segala kebocoran informasi selain nama dan tanggal Anda terkena covid",
-                            style: TextStyle(
-                              fontFamily: 'Hind',
-                              color: Colors.white,
-                            ),
+                        child: RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text:
+                                    "Segala kebocoran informasi selain nama dan tanggal Anda terkena covid",
+                                style: TextStyle(
+                                  fontFamily: 'Hind',
+                                  color: Colors.white,
+                                ),
+                              ),
+                              TextSpan(
+                                text: " bukan menjadi tanggung jawab kami",
+                                style: TextStyle(
+                                  fontFamily: 'Hind',
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              TextSpan(
+                                text: ".",
+                                style: TextStyle(
+                                  fontFamily: 'Hind',
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
                           ),
-                          TextSpan(
-                            text: " bukan menjadi tanggung jawab kami",
-                            style: TextStyle(
-                              fontFamily: 'Hind',
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          TextSpan(
-                            text: ".",
-                            style: TextStyle(
-                              fontFamily: 'Hind',
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ))),
+                        ),
+                      ),
                     ],
                   ),
                 ),
