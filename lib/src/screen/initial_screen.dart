@@ -50,13 +50,24 @@ class InitialScreen extends StatelessWidget {
                         padding: EdgeInsets.all(15),
                         child: Text(
                           "LOGIN",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        width: 100,
+                        decoration: BoxDecoration(
+                          color: CustomColor.redTheme.withAlpha(255),
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
                         ),
                       ),
                       Positioned.fill(
                         child: Material(
-                          color: Colors.transparent,
+                          color: CustomColor.redTheme,
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
                           child: InkWell(
-                            splashColor: CustomColor.lightCoral,
+                            borderRadius: BorderRadius.all(Radius.circular(50)),
+                            splashColor: CustomColor.wewak,
                             onTap: () =>
                                 Navigator.of(context).pushNamed('/login'),
                           ),

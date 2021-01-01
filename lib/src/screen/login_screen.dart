@@ -82,13 +82,24 @@ class LoginScreen extends StatelessWidget {
                         padding: EdgeInsets.all(15),
                         child: Text(
                           "KIRIM OTP",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        width: 150,
+                        decoration: BoxDecoration(
+                          color: CustomColor.redTheme.withAlpha(255),
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
                         ),
                       ),
                       Positioned.fill(
                         child: Material(
                           color: Colors.transparent,
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
                           child: InkWell(
-                            splashColor: CustomColor.lightCoral,
+                            borderRadius: BorderRadius.all(Radius.circular(50)),
+                            splashColor: CustomColor.wewak,
                             onTap: () {
                               this.interface.sendOtp(context);
                             },

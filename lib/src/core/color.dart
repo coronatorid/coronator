@@ -9,4 +9,5 @@ class CustomColor {
   static const Color froly = const Color(0xFed6061);
   static const Color gainsboro = const Color(0xFdfdfdf);
   static const Color grey = const Color(0xF7a7a7a);
+  static const Color redTheme = const Color(0xFF68E8E);
 }
