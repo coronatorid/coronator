@@ -110,6 +110,7 @@ class App extends StatelessWidget {
               ),
           "/login": (context) => LoginController(api).build(context),
           "/otp": (context) => OTPController(api).build(context),
+          "/report": (context) => ReportController(telegram).build(context),
           "/timeline": (context) => TimelineController().build(
                 context,
               ),

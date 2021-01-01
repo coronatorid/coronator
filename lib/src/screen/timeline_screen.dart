@@ -24,8 +24,8 @@ class TimelineScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               InkWell(
-                onTap: () async {
-                  await this.interface.tapLogout(context);
+                onTap: () {
+                  Navigator.of(context).pushNamed("/report");
                 },
                 customBorder: CircleBorder(),
                 child: Column(
