@@ -16,7 +16,8 @@ class TimelineScreen extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
         child: Container(
-          height: 75,
+          height: 100,
+          padding: EdgeInsets.symmetric(vertical: 10),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -29,9 +30,29 @@ class TimelineScreen extends StatelessWidget {
                 customBorder: CircleBorder(),
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: 10,
+                    Container(
+                      height: 40,
+                      width: 40,
+                      padding: EdgeInsets.all(5),
+                      child: Image(
+                        image: AssetImage('assets/images/alarm.png'),
+                        width: 100,
+                      ),
                     ),
+                    Text(
+                      "LAPOR \nPOSITIF COVID",
+                      textAlign: TextAlign.center,
+                    )
+                  ],
+                ),
+              ),
+              InkWell(
+                onTap: () async {
+                  await this.interface.tapLogout(context);
+                },
+                customBorder: CircleBorder(),
+                child: Column(
+                  children: [
                     Container(
                       height: 40,
                       width: 40,
@@ -41,7 +62,7 @@ class TimelineScreen extends StatelessWidget {
                         width: 100,
                       ),
                     ),
-                    Text("LOG OUT"),
+                    Text("LOGOUT")
                   ],
                 ),
               )
