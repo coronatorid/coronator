@@ -26,3 +26,5 @@ Based on the color of our logo [(Color Palette Generator by Canva)](https://www.
 - ![#F28989](https://via.placeholder.com/15/F28989/000000?text=+) `#F28989` Froly
 - ![#954141](https://via.placeholder.com/15/954141/000000?text=+) `#954141` Tosca
 - ![#8E4C4C](https://via.placeholder.com/15/8E4C4C/000000?text=+) `#8E4C4C` Copper Rust
+
+Color references file : [4 Palette](coronatorid-4palette.png) & [7 Palette](coronatorid-7palette.png)
