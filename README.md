@@ -1,7 +1,8 @@
 <p align="center">
-  <img src="assets/icons/logo_64.png" width="100" height="100"/>
-  <br/>
-  <b>Coronator's Logo</b>
+  <a href="https://coronator.id/">
+    <img src="assets/icons/logo_64.png" height="128">
+    <h1 align="center">Coronator</h1>
+  </a>
 </p>
 
 # Coronator
