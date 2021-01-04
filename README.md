@@ -28,4 +28,4 @@ Based on the color of our logo [(Color Palette Generator by Canva)](https://www.
 - ![#954141](https://via.placeholder.com/15/954141/000000?text=+) `#954141` Tosca
 - ![#8E4C4C](https://via.placeholder.com/15/8E4C4C/000000?text=+) `#8E4C4C` Copper Rust
 
-Color references file : [4 Palette](coronatorid-4palette.png) & [7 Palette](coronatorid-7palette.png)
+Color references file : [4 Palette](https://user-images.githubusercontent.com/7739709/103440769-0c8a2300-4c7b-11eb-972e-c301957705e9.jpg) & [7 Palette](https://user-images.githubusercontent.com/7739709/103440772-1449c780-4c7b-11eb-8d97-2f9313811e6b.jpg)
