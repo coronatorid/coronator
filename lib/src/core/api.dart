@@ -1,5 +1,6 @@
 import 'package:coronator/src/core/api/api_builder.dart';
 import 'package:coronator/src/core/api/auth_api.dart';
+import 'package:coronator/src/core/api/report_api.dart';
 import 'package:coronator/src/core/api/track_api.dart';
 import 'package:http/http.dart' as http;
 
@@ -15,6 +16,10 @@ class API {
 
   AuthAPI auth() {
     return AuthAPI(APIBuilder(this._client, this._serverHost));
+  }
+
+  ReportAPI report() {
+    return ReportAPI(APIBuilder(this._client, this._serverHost));
   }
 
   TrackAPI track() {

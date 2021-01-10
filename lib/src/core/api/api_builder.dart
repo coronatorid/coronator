@@ -12,6 +12,25 @@ class APIBuilder {
 
   APIBuilder(this._client, this.serverHost);
 
+  Future<dynamic> get(
+    BuildContext context,
+    String path, {
+    dynamic responseMapper,
+    String token,
+  }) async {
+    http.Response response = await this._client.get(
+          this.buildURL(context, path),
+          headers: this.buildHeaders(context, token: token),
+        );
+    this.errorMapper(response);
+    Map<String, dynamic> json = jsonDecode(response.body);
+    if (responseMapper != null) {
+      return responseMapper(json['data']);
+    }
+
+    return json;
+  }
+
   dynamic post(
       BuildContext context, String path, RequestInterface requestInterface,
       {dynamic responseMapper, String token}) async {

@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:synchronized/synchronized.dart';
-import 'package:teledart/telegram.dart';
 import 'package:workmanager/workmanager.dart';
 
 // TODO: REFACTORING THIS IN THE FUTURE
@@ -57,7 +56,6 @@ class App extends StatelessWidget {
   final String clientUID;
   final String clientSecret;
   final bool workerDebugMode;
-  final Telegram telegram;
 
   App({
     Key key,
@@ -65,7 +63,6 @@ class App extends StatelessWidget {
     @required this.clientUID,
     @required this.clientSecret,
     @required this.workerDebugMode,
-    @required this.telegram,
   }) : super(key: key);
 
   @override
@@ -110,7 +107,7 @@ class App extends StatelessWidget {
               ),
           "/login": (context) => LoginController(api).build(context),
           "/otp": (context) => OTPController(api).build(context),
-          "/report": (context) => ReportController(telegram).build(context),
+          "/report": (context) => ReportController(api).build(context),
           "/timeline": (context) => TimelineController().build(
                 context,
               ),
