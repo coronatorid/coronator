@@ -111,6 +111,7 @@ class App extends StatelessWidget {
           "/timeline": (context) => TimelineController().build(
                 context,
               ),
+          "/camera": (context) => CameraController().build(context),
         },
       ),
     );
