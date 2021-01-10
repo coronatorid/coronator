@@ -37,16 +37,16 @@ class ReportSerializer {
   String statusHumanized() {
     switch (this.status) {
       case 0:
-        return "dikonfirmasi";
+        return "sudha dikonfirmasi";
         break;
       case 1:
-        return "ditolak";
+        return "telah ditolak";
         break;
       case 2:
-        return "diproses";
+        return "sedang diproses";
         break;
       default:
-        return "diproses";
+        return "sedang diproses";
     }
   }
 }

@@ -42,33 +42,23 @@ class ReportScreen extends StatelessWidget {
                     Container(
                       width: 350,
                       child: Text(
-                        "Laporan Anda membantu memberitahu orang lain yang mungkin Anda paparkan.",
+                        "Laporan Anda membantu memberitahu sesama pengguna aplikasi coronator yang mungkin Anda paparkan.",
                         style: TextStyle(
                           fontFamily: 'Hind',
+                          fontSize: 12,
                         ),
                       ),
                     ),
                   ],
                 ),
                 Divider(),
-                Row(
-                  children: [
-                    Text(
-                      "Taruh surat keterangan positif covid pada form dibawah.\n",
-                      style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        fontSize: 10,
-                      ),
-                    ),
-                  ],
-                ),
                 buildAlert1(),
                 SizedBox(
                   height: 10,
                 ),
                 buildAlert2(),
                 SizedBox(
-                  height: 50,
+                  height: 30,
                 ),
                 buildForm(),
               ],
@@ -90,82 +80,86 @@ class ReportScreen extends StatelessWidget {
           return Container();
         }
 
-        return Container(
-          padding: EdgeInsets.all(10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.network(
-                reportProvider.data.imagePath,
-                height: 100,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                padding: EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: CustomColor.redTheme.withAlpha(255),
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  children: [
-                    Text(
-                      "Laporan Anda sedang " +
-                          reportProvider.data.statusHumanized(),
-                      style: TextStyle(
-                        fontFamily: 'Hind',
-                        color: CustomColor.redTheme.withAlpha(255),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 25,
-                    ),
-                    Stack(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          child: Text(
-                            "Cabut Laporan",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                            ),
-                          ),
-                          width: 150,
-                          decoration: BoxDecoration(
-                            color: CustomColor.redTheme.withAlpha(255),
-                            borderRadius: BorderRadius.all(Radius.circular(25)),
-                          ),
-                        ),
-                        Positioned.fill(
-                          child: Material(
-                            color: Colors.transparent,
-                            borderRadius: BorderRadius.all(Radius.circular(25)),
-                            child: InkWell(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(25)),
-                              splashColor: Colors.white,
-                              onTap: () async {
-                                await this.interface.removeReport(context);
-                                this._showMyDialog(context);
-                              },
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
+        return buildReportedCases(reportProvider, context);
       },
       child: Container(),
+    );
+  }
+
+  Container buildReportedCases(
+      ReportProvider reportProvider, BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.network(
+            reportProvider.data.imagePath,
+            height: 200,
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            padding: EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: CustomColor.redTheme.withAlpha(255),
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Column(
+              children: [
+                Text(
+                  "Laporan Anda " + reportProvider.data.statusHumanized(),
+                  style: TextStyle(
+                    fontFamily: 'Hind',
+                    color: CustomColor.redTheme.withAlpha(255),
+                    fontSize: 12,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Stack(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        "Cabut Laporan",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                        ),
+                      ),
+                      width: 150,
+                      decoration: BoxDecoration(
+                        color: CustomColor.redTheme.withAlpha(255),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: Material(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                        child: InkWell(
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                          splashColor: Colors.white,
+                          onTap: () async {
+                            await this.interface.removeReport(context);
+                            this._showMyDialog(context);
+                          },
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -212,6 +206,7 @@ class ReportScreen extends StatelessWidget {
           Expanded(
             child: RichText(
               text: TextSpan(
+                style: TextStyle(fontSize: 12),
                 children: [
                   TextSpan(
                     text:
@@ -270,6 +265,7 @@ class ReportScreen extends StatelessWidget {
           Expanded(
             child: RichText(
               text: TextSpan(
+                style: TextStyle(fontSize: 12),
                 children: [
                   TextSpan(
                     text: "Sensor semua informasi kecuali ",
