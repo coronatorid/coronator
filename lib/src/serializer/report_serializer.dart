@@ -33,4 +33,20 @@ class ReportSerializer {
       DateTime.parse(json['updated_at']),
     );
   }
+
+  String statusHumanized() {
+    switch (this.status) {
+      case 0:
+        return "dikonfirmasi";
+        break;
+      case 1:
+        return "ditolak";
+        break;
+      case 2:
+        return "diproses";
+        break;
+      default:
+        return "diproses";
+    }
+  }
 }

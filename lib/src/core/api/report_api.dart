@@ -26,4 +26,17 @@ class ReportAPI {
 
     return reportSerializer;
   }
+
+  Future<void> deleteReport(BuildContext context) async {
+    AuthProvider authProvider = Provider.of<AuthProvider>(
+      context,
+      listen: false,
+    );
+
+    await this._apiBuilder.delete(
+          context,
+          '/reports',
+          token: authProvider.getLogin().auth.token,
+        );
+  }
 }

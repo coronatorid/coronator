@@ -32,4 +32,16 @@ class ReportProvider with ChangeNotifier {
       print("GOT OTHER EXCEPTION " + e.toString());
     }
   }
+
+  Future<void> removeReport(BuildContext context) async {
+    try {
+      await this.api.report().deleteReport(context);
+      this._data = null;
+      print("REMOVE REPORT COMPLETE");
+      notifyListeners();
+    } catch (e, backtrace) {
+      print("GOT API EXCEPTION " + e.toString());
+      print("BACKTRACE " + backtrace.toString());
+    }
+  }
 }

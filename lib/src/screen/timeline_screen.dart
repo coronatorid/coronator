@@ -36,12 +36,15 @@ class TimelineScreen extends StatelessWidget {
                       padding: EdgeInsets.all(5),
                       child: Image(
                         image: AssetImage('assets/images/alarm.png'),
-                        width: 100,
                       ),
+                    ),
+                    SizedBox(
+                      height: 5,
                     ),
                     Text(
                       "LAPOR \nPOSITIF COVID",
                       textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 8),
                     )
                   ],
                 ),
@@ -58,11 +61,17 @@ class TimelineScreen extends StatelessWidget {
                       width: 40,
                       padding: EdgeInsets.all(5),
                       child: Image(
-                        image: AssetImage('assets/images/shutdown.png'),
-                        width: 100,
+                        image: AssetImage('assets/images/logout.png'),
                       ),
                     ),
-                    Text("LOGOUT")
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      "LOGOUT",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 8),
+                    )
                   ],
                 ),
               )

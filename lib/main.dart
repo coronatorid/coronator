@@ -1,6 +1,5 @@
 import 'package:coronator/src/app.dart';
 import 'package:flutter/material.dart';
-import 'package:teledart/telegram.dart';
 
 void main() {
   const String clientUID =

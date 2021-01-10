@@ -49,6 +49,26 @@ class APIBuilder {
     return json;
   }
 
+  Future<dynamic> delete(
+    BuildContext context,
+    String path, {
+    dynamic responseMapper,
+    String token,
+  }) async {
+    http.Response response = await this._client.delete(
+          this.buildURL(context, path),
+          headers: this.buildHeaders(context, token: token),
+        );
+    this.errorMapper(response);
+    Map<String, dynamic> json = jsonDecode(response.body);
+
+    if (responseMapper != null) {
+      return responseMapper(json['data']);
+    }
+
+    return json;
+  }
+
   Map<String, String> buildHeaders(
     BuildContext context, {
     String token,

@@ -1,9 +1,14 @@
 import 'package:coronator/src/core/color.dart';
+import 'package:coronator/src/interface/report_interface.dart';
 import 'package:coronator/src/provider/report_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ReportScreen extends StatelessWidget {
+  final ReportInterface interface;
+
+  ReportScreen(this.interface);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +82,7 @@ class ReportScreen extends StatelessWidget {
   Widget buildForm() {
     return Consumer<ReportProvider>(
       builder: (
-        _,
+        BuildContext context,
         ReportProvider reportProvider,
         __,
       ) {
@@ -108,7 +113,8 @@ class ReportScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      "Laporan Anda sedang di proses",
+                      "Laporan Anda sedang " +
+                          reportProvider.data.statusHumanized(),
                       style: TextStyle(
                         fontFamily: 'Hind',
                         color: CustomColor.redTheme.withAlpha(255),
@@ -143,7 +149,10 @@ class ReportScreen extends StatelessWidget {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(25)),
                               splashColor: Colors.white,
-                              onTap: () {},
+                              onTap: () async {
+                                await this.interface.removeReport(context);
+                                this._showMyDialog(context);
+                              },
                             ),
                           ),
                         )
@@ -157,6 +166,24 @@ class ReportScreen extends StatelessWidget {
         );
       },
       child: Container(),
+    );
+  }
+
+  Future<void> _showMyDialog(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Laporan berhasil dihapus'),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
