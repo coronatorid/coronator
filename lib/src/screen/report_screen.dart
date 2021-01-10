@@ -77,7 +77,107 @@ class ReportScreen extends StatelessWidget {
         __,
       ) {
         if (reportProvider.data == null) {
-          return Container();
+          return Container(
+            padding: EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image(
+                  image: AssetImage('assets/images/800x600.png'),
+                  height: 200,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  padding: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: CustomColor.redTheme.withAlpha(255),
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Stack(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            child: Text(
+                              "Ambil Foto",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: CustomColor.redTheme.withAlpha(255),
+                                fontSize: 12,
+                                fontFamily: 'Hind',
+                              ),
+                            ),
+                            width: 100,
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25)),
+                              border: Border.all(
+                                color: CustomColor.redTheme.withAlpha(255),
+                              ),
+                            ),
+                          ),
+                          Positioned.fill(
+                            child: Material(
+                              color: Colors.transparent,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25)),
+                              child: InkWell(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(25)),
+                                splashColor: Colors.white,
+                                onTap: () async {},
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      Stack(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            child: Text(
+                              "Laporkan",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontFamily: 'Hind',
+                              ),
+                            ),
+                            width: 100,
+                            decoration: BoxDecoration(
+                              color: CustomColor.redTheme.withAlpha(255),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25)),
+                            ),
+                          ),
+                          Positioned.fill(
+                            child: Material(
+                              color: Colors.transparent,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25)),
+                              child: InkWell(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(25)),
+                                splashColor: Colors.white,
+                                onTap: () async {},
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
         }
 
         return buildReportedCases(reportProvider, context);
