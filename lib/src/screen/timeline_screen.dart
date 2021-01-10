@@ -146,6 +146,10 @@ class TimelineScreen extends StatelessWidget {
                 Expanded(
                   child: ListView(
                     children: [
+                      SizedBox(
+                        height: 10,
+                      ),
+                      noCases(),
                       // TODO: Call api for this
                       // positiveCases(context),
                       // SizedBox(
@@ -164,6 +168,29 @@ class TimelineScreen extends StatelessWidget {
           ),
         );
       }),
+    );
+  }
+
+  Container noCases() {
+    return Container(
+      padding: EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: CustomColor.redTheme.withAlpha(255),
+        ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        children: [
+          Text(
+            "Anda belum bertemu dengan orang yang mempunyai riwayat kasus positif maupun suspected.",
+            style: TextStyle(
+              fontFamily: 'Hind',
+              color: CustomColor.redTheme.withAlpha(255),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
