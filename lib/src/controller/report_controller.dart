@@ -4,6 +4,7 @@ import 'package:coronator/src/interface/report_interface.dart';
 import 'package:coronator/src/provider/report_provider.dart';
 import 'package:coronator/src/screen/report_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:synchronized/synchronized.dart';
 
@@ -18,6 +19,13 @@ class ReportController implements ReportInterface {
   Widget build(BuildContext context) {
     ReportProvider reportProvider = ReportProvider(api);
     reportProvider.initialize(context);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      Map<Permission, PermissionStatus> statuses = await [
+        Permission.camera,
+      ].request();
+      print(statuses.toString());
+    });
 
     return ChangeNotifierProvider(
       create: (context) {

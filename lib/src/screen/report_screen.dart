@@ -41,27 +41,27 @@ class ReportScreen extends StatelessWidget {
                   children: [
                     Container(
                       width: 350,
-                      child: RichText(
-                        text: TextSpan(
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Hind',
-                          ),
-                          children: [
-                            TextSpan(
-                              text:
-                                  "Taruh surat keterangan positif covid pada form dibawah.\n",
-                              style: TextStyle(
-                                decoration: TextDecoration.underline,
-                              ),
-                            ),
-                          ],
+                      child: Text(
+                        "Laporan Anda membantu memberitahu orang lain yang mungkin Anda paparkan.",
+                        style: TextStyle(
+                          fontFamily: 'Hind',
                         ),
                       ),
                     ),
                   ],
                 ),
                 Divider(),
+                Row(
+                  children: [
+                    Text(
+                      "Taruh surat keterangan positif covid pada form dibawah.\n",
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        fontSize: 10,
+                      ),
+                    ),
+                  ],
+                ),
                 buildAlert1(),
                 SizedBox(
                   height: 10,
