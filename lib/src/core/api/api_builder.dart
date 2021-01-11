@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:coronator/src/core/api/api_exception.dart';
 import 'package:coronator/src/interface/request_interface.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart' as httpParser;
+import 'package:mime/mime.dart';
 
 // CONTEXT CAN BE NULL IN THIS CLASS.
 // TODO: REMOVE CONTEXT DEPENDENCIES SINCE IT'S ALSO CALL IN BACKGROUND JOB
@@ -24,6 +27,41 @@ class APIBuilder {
         );
     this.errorMapper(response);
     Map<String, dynamic> json = jsonDecode(response.body);
+    if (responseMapper != null) {
+      return responseMapper(json['data']);
+    }
+
+    return json;
+  }
+
+  Future<dynamic> multipart(
+    BuildContext context,
+    String path,
+    File file, {
+    dynamic responseMapper,
+    String token,
+  }) async {
+    var uri = Uri.parse(this.buildURL(context, path));
+    var request = http.MultipartRequest('POST', uri);
+    var mime = lookupMimeType(file.path).split("/");
+    request.files.add(
+      await http.MultipartFile.fromPath(
+        "file",
+        file.path,
+        contentType: httpParser.MediaType(
+          mime.first,
+          mime.last,
+        ),
+      ),
+    );
+    request.headers.addAll(this.buildHeaders(context, token: token));
+
+    var streamedResponse = await request.send();
+    var response = await http.Response.fromStream(streamedResponse);
+
+    this.errorMapper(response);
+    Map<String, dynamic> json = jsonDecode(response.body);
+
     if (responseMapper != null) {
       return responseMapper(json['data']);
     }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:coronator/src/core/api.dart';
 import 'package:coronator/src/core/api/api_exception.dart';
@@ -76,8 +78,39 @@ class ReportController implements ReportInterface {
     if (file == null) {
       print("FILE IS NULL");
     } else {
-      reportProvider.setFile(file);
+      XFile converted = file;
+      reportProvider.setFile(File(converted.path));
       print("FILE PATH: " + reportProvider.file.path);
     }
+  }
+
+  @override
+  Future<void> report(BuildContext context) async {
+    ReportProvider reportProvider = Provider.of<ReportProvider>(
+      context,
+      listen: false,
+    );
+
+    print("START REPORT");
+
+    this._reportLock.synchronized(() async {
+      if (this._reportClicked) {
+        return;
+      } else {
+        this._reportClicked = true;
+      }
+
+      try {
+        await reportProvider.report(context);
+      } on APIException catch (e, backtrace) {
+        print("API ERROR: " + e.toString());
+        print("STACKTRACE: " + backtrace.toString());
+      } catch (e, backtrace) {
+        print("ERROR: " + e.toString());
+        print("STACKTRACE: " + backtrace.toString());
+      } finally {
+        this._reportClicked = false;
+      }
+    });
   }
 }

@@ -193,8 +193,17 @@ class ReportScreen extends StatelessWidget {
                                       context,
                                       'Akses untuk kamera harus diberikan untuk mengakses fitur ini',
                                     );
+                                  }
+
+                                  if (reportProvider.file == null) {
+                                    this._showMyDialog(
+                                      context,
+                                      'Harap lampirkan foto terlebih dahulu',
+                                    );
                                     return;
                                   }
+
+                                  await this.interface.report(context);
                                 },
                               ),
                             ),
