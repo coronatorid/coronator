@@ -7,6 +7,7 @@ class InitialScreen extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Builder(
         builder: (BuildContext context) {
           return SafeArea(

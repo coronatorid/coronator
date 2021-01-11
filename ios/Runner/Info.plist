@@ -45,5 +45,7 @@
 	<string>This app needs access to location when open.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>This app needs access to location when in the background.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera is used for take a picture of covid-19 positive letter</string>
 </dict>
 </plist>

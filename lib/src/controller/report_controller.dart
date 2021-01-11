@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:coronator/src/core/api.dart';
 import 'package:coronator/src/core/api/api_exception.dart';
 import 'package:coronator/src/interface/report_interface.dart';
@@ -23,6 +24,7 @@ class ReportController implements ReportInterface {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       Map<Permission, PermissionStatus> statuses = await [
         Permission.camera,
+        Permission.microphone,
       ].request();
       print(statuses.toString());
     });
@@ -61,5 +63,21 @@ class ReportController implements ReportInterface {
         this._reportClicked = false;
       }
     });
+  }
+
+  @override
+  Future<void> setPicture(BuildContext context) async {
+    ReportProvider reportProvider = Provider.of<ReportProvider>(
+      context,
+      listen: false,
+    );
+
+    var file = await Navigator.of(context).pushNamed("/camera");
+    if (file == null) {
+      print("FILE IS NULL");
+    } else {
+      reportProvider.setFile(file);
+      print("FILE PATH: " + reportProvider.file.path);
+    }
   }
 }

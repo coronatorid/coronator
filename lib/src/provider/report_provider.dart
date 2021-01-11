@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:coronator/src/core/api.dart';
 import 'package:coronator/src/core/api/api_exception.dart';
 import 'package:coronator/src/serializer/report_serializer.dart';
@@ -10,6 +11,9 @@ class ReportProvider with ChangeNotifier {
 
   ReportSerializer _data;
   ReportSerializer get data => this._data;
+
+  XFile _file;
+  XFile get file => this._file;
 
   Future<void> initialize(BuildContext context) async {
     try {
@@ -43,5 +47,10 @@ class ReportProvider with ChangeNotifier {
       print("GOT API EXCEPTION " + e.toString());
       print("BACKTRACE " + backtrace.toString());
     }
+  }
+
+  void setFile(XFile file) {
+    this._file = file;
+    notifyListeners();
   }
 }

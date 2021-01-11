@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:coronator/src/core/color.dart';
 import 'package:coronator/src/interface/report_interface.dart';
 import 'package:coronator/src/provider/report_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 class ReportScreen extends StatelessWidget {
@@ -12,6 +15,7 @@ class ReportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Builder(builder: (BuildContext context) {
         return SafeArea(
           child: Container(
@@ -82,10 +86,15 @@ class ReportScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image(
-                  image: AssetImage('assets/images/800x600.png'),
-                  height: 200,
-                ),
+                reportProvider.file == null
+                    ? Image(
+                        image: AssetImage('assets/images/800x600.png'),
+                        height: 200,
+                      )
+                    : Image.file(
+                        File(reportProvider.file.path),
+                        height: 200,
+                      ),
                 SizedBox(
                   height: 20,
                 ),
@@ -131,7 +140,18 @@ class ReportScreen extends StatelessWidget {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(25)),
                                 splashColor: Colors.white,
-                                onTap: () async {},
+                                onTap: () async {
+                                  if (await Permission.camera.isGranted ==
+                                      false) {
+                                    this._showMyDialog(
+                                      context,
+                                      'Akses untuk kamera harus diberikan untuk mengakses fitur ini',
+                                    );
+                                    return;
+                                  }
+
+                                  await this.interface.setPicture(context);
+                                },
                               ),
                             ),
                           )
@@ -166,7 +186,16 @@ class ReportScreen extends StatelessWidget {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(25)),
                                 splashColor: Colors.white,
-                                onTap: () async {},
+                                onTap: () async {
+                                  if (await Permission.camera.isGranted ==
+                                      false) {
+                                    this._showMyDialog(
+                                      context,
+                                      'Akses untuk kamera harus diberikan untuk mengakses fitur ini',
+                                    );
+                                    return;
+                                  }
+                                },
                               ),
                             ),
                           )
@@ -248,7 +277,10 @@ class ReportScreen extends StatelessWidget {
                           splashColor: Colors.white,
                           onTap: () async {
                             await this.interface.removeReport(context);
-                            this._showMyDialog(context);
+                            this._showMyDialog(
+                              context,
+                              'Laporan berhasil dihapus',
+                            );
                           },
                         ),
                       ),
@@ -263,7 +295,7 @@ class ReportScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _showMyDialog(BuildContext context) async {
+  Future<void> _showMyDialog(BuildContext context, String text) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: true,
@@ -272,7 +304,7 @@ class ReportScreen extends StatelessWidget {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('Laporan berhasil dihapus'),
+                Text(text),
               ],
             ),
           ),

@@ -15,6 +15,8 @@ void main() {
   print("SERVER HOST: " + serverHost);
   print("WORKER DEBUG MODE: " + workerMode);
 
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(App(
     serverHost: serverHost,
     clientUID: clientUID,

@@ -19,126 +19,131 @@ class OTPScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Builder(builder: (BuildContext context) {
-      OTPProvider otpProvider =
-          Provider.of<OTPProvider>(context, listen: false);
+    return Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Builder(builder: (BuildContext context) {
+          OTPProvider otpProvider =
+              Provider.of<OTPProvider>(context, listen: false);
 
-      return SafeArea(
-          child: Container(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "OTP",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Masukan nomor OTP yang dikirim melalui whatsapp.",
-                    style: TextStyle(
-                      fontFamily: 'Hind',
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+          return SafeArea(
+              child: Container(
+                  padding: EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        width: 50,
-                        child: buildOTPField(context, otpProvider, 0, true),
-                      ),
-                      Container(
-                        width: 50,
-                        child: buildOTPField(context, otpProvider, 1, false),
-                      ),
-                      Container(
-                        width: 50,
-                        child: buildOTPField(context, otpProvider, 2, false),
-                      ),
-                      Container(
-                        width: 50,
-                        child: buildOTPField(context, otpProvider, 3, false),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      InkWell(
-                        child: Text(
-                          "Tidak menerima OTP? Coba kirim otp lagi.",
-                          style: TextStyle(
-                            fontFamily: "Hind",
-                            decoration: TextDecoration.underline,
-                          ),
+                      Text(
+                        "OTP",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
                         ),
-                        onTap: () {
-                          this.interface.resendOTP(context);
-                        },
                       ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Stack(
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Masukan nomor OTP yang dikirim melalui whatsapp.",
+                        style: TextStyle(
+                          fontFamily: 'Hind',
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Container(
-                            padding: EdgeInsets.all(15),
-                            child: Text(
-                              "SUBMIT",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                            width: 150,
-                            decoration: BoxDecoration(
-                              color: CustomColor.redTheme.withAlpha(255),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(50)),
-                            ),
+                            width: 50,
+                            child: buildOTPField(context, otpProvider, 0, true),
                           ),
-                          Positioned.fill(
-                            child: Material(
-                              color: Colors.transparent,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(50)),
-                              child: InkWell(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(50)),
-                                splashColor: CustomColor.wewak,
-                                onTap: () {
-                                  this.interface.submitOTP(context);
-                                },
-                              ),
-                            ),
-                          )
+                          Container(
+                            width: 50,
+                            child:
+                                buildOTPField(context, otpProvider, 1, false),
+                          ),
+                          Container(
+                            width: 50,
+                            child:
+                                buildOTPField(context, otpProvider, 2, false),
+                          ),
+                          Container(
+                            width: 50,
+                            child:
+                                buildOTPField(context, otpProvider, 3, false),
+                          ),
                         ],
                       ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          InkWell(
+                            child: Text(
+                              "Tidak menerima OTP? Coba kirim otp lagi.",
+                              style: TextStyle(
+                                fontFamily: "Hind",
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                            onTap: () {
+                              this.interface.resendOTP(context);
+                            },
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Stack(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(15),
+                                child: Text(
+                                  "SUBMIT",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                width: 150,
+                                decoration: BoxDecoration(
+                                  color: CustomColor.redTheme.withAlpha(255),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(50)),
+                                ),
+                              ),
+                              Positioned.fill(
+                                child: Material(
+                                  color: Colors.transparent,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(50)),
+                                  child: InkWell(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50)),
+                                    splashColor: CustomColor.wewak,
+                                    onTap: () {
+                                      this.interface.submitOTP(context);
+                                    },
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
                     ],
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                ],
-              )));
-    }));
+                  )));
+        }));
   }
 
   TextFormField buildOTPField(
