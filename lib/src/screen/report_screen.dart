@@ -24,7 +24,7 @@ class ReportScreen extends StatelessWidget {
               right: 20,
               top: 20,
             ),
-            child: Column(
+            child: ListView(
               children: [
                 Row(
                   children: [
