@@ -96,6 +96,7 @@ class App extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Coronator',
         theme: ThemeData(
           fontFamily: 'Montserrat',
