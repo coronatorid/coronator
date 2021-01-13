@@ -18,15 +18,13 @@ class LoginController implements LoginInterface {
   LoginController(this._api);
 
   Widget build(BuildContext context) {
-    return Provider(
+    return ChangeNotifierProvider(
       create: (context) => LoginProvider(""),
       child: LoginScreen(this),
     );
   }
 
   void sendOtp(BuildContext context) async {
-    Scaffold.of(context).hideCurrentSnackBar();
-
     this._sendOtpLock.synchronized(() async {
       if (this._sendOtpClicked) {
         return;
@@ -34,10 +32,10 @@ class LoginController implements LoginInterface {
         this._sendOtpClicked = true;
       }
 
-      try {
-        LoginProvider loginProvider =
-            Provider.of<LoginProvider>(context, listen: false);
+      LoginProvider loginProvider =
+          Provider.of<LoginProvider>(context, listen: false);
 
+      try {
         RegExp regExp = new RegExp(
           r"^\+62\d{10,12}",
           caseSensitive: false,
@@ -45,9 +43,7 @@ class LoginController implements LoginInterface {
         );
 
         if (regExp.hasMatch(loginProvider.phoneNumber()) == false) {
-          Scaffold.of(context).showSnackBar(SnackBar(
-            content: Text("Nomor telfon tidak valid"),
-          ));
+          loginProvider.setErrorString("Nomor telfon tidak valid");
           return;
         }
 
@@ -58,17 +54,15 @@ class LoginController implements LoginInterface {
 
         print(otpSerializer.phoneNumber.toString());
         print(otpSerializer.sentTime.toString());
+        loginProvider.setErrorString("");
 
         Navigator.of(context).pushNamed('/otp', arguments: otpSerializer);
       } on APIException catch (e, backtrace) {
-        Scaffold.of(context).hideCurrentSnackBar();
-        Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text(e.error.firstError().detail),
-        ));
-
+        loginProvider.setErrorString(e.error.firstError().detail);
         print("API ERROR: " + e.toString());
         print("STACKTRACE: " + backtrace.toString());
       } catch (e, backtrace) {
+        loginProvider.setErrorString("Telah terjadi error pad aplikasi");
         print("ERROR: " + e.toString());
         print("STACKTRACE: " + backtrace.toString());
       } finally {

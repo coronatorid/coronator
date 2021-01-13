@@ -1,6 +1,8 @@
 import 'package:coronator/src/core/color.dart';
 import 'package:coronator/src/interface/login_interface.dart';
 import 'package:coronator/src/provider/login_provider.dart';
+import 'package:coronator/src/screen/component/alert_text.dart';
+import 'package:coronator/src/screen/component/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -73,45 +75,29 @@ class LoginScreen extends StatelessWidget {
                     style: TextStyle(fontFamily: 'Hind', fontSize: 16),
                   ),
                   SizedBox(
-                    height: 75,
+                    height: 10,
+                  ),
+                  Consumer<LoginProvider>(
+                    builder: (_, loginProvider, __) {
+                      if (loginProvider.errorString() == null) {
+                        return Container();
+                      }
+
+                      return AlertText(loginProvider.errorString());
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Stack(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(15),
-                            child: Text(
-                              "KIRIM OTP",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                            width: 150,
-                            decoration: BoxDecoration(
-                              color: CustomColor.redTheme.withAlpha(255),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(50)),
-                            ),
-                          ),
-                          Positioned.fill(
-                            child: Material(
-                              color: Colors.transparent,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(50)),
-                              child: InkWell(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(50)),
-                                splashColor: CustomColor.wewak,
-                                onTap: () {
-                                  this.interface.sendOtp(context);
-                                },
-                              ),
-                            ),
-                          )
-                        ],
+                      Button(
+                        buttonText: "KIRIM OTP",
+                        onTap: () {
+                          this.interface.sendOtp(context);
+                        },
+                        width: 150,
                       ),
                     ],
                   ),
