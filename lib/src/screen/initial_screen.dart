@@ -1,4 +1,5 @@
 import 'package:coronator/src/core/color.dart';
+import 'package:coronator/src/screen/component/button.dart';
 import 'package:flutter/material.dart';
 
 class InitialScreen extends StatelessWidget {
@@ -45,36 +46,9 @@ class InitialScreen extends StatelessWidget {
                   SizedBox(
                     height: 60,
                   ),
-                  Stack(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(15),
-                        child: Text(
-                          "LOGIN",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                        width: 100,
-                        decoration: BoxDecoration(
-                          color: CustomColor.redTheme.withAlpha(255),
-                          borderRadius: BorderRadius.all(Radius.circular(50)),
-                        ),
-                      ),
-                      Positioned.fill(
-                        child: Material(
-                          color: CustomColor.redTheme,
-                          borderRadius: BorderRadius.all(Radius.circular(50)),
-                          child: InkWell(
-                            borderRadius: BorderRadius.all(Radius.circular(50)),
-                            splashColor: CustomColor.wewak,
-                            onTap: () =>
-                                Navigator.of(context).pushNamed('/login'),
-                          ),
-                        ),
-                      )
-                    ],
+                  Button(
+                    buttonText: "LOGIN",
+                    onTap: () => Navigator.of(context).pushNamed('/login'),
                   ),
                 ],
               ),
