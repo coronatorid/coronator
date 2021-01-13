@@ -16,10 +16,11 @@ class InitialController {
       return TimelineController().build(context);
     }
 
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      LocationPermission permission = await Geolocator.requestPermission();
-      print(permission.toString());
-    });
+    // TODO: move this to timeline
+    // WidgetsBinding.instance.addPostFrameCallback((_) async {
+    //   LocationPermission permission = await Geolocator.requestPermission();
+    //   print(permission.toString());
+    // });
 
     return InitialScreen();
   }
