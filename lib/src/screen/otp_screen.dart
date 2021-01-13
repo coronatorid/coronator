@@ -1,6 +1,8 @@
 import 'package:coronator/src/core/color.dart';
 import 'package:coronator/src/interface/otp_interface.dart';
 import 'package:coronator/src/provider/otp_provider.dart';
+import 'package:coronator/src/screen/component/alert_text.dart';
+import 'package:coronator/src/screen/component/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
@@ -81,6 +83,23 @@ class OTPScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
+                          Consumer<OTPProvider>(
+                            builder: (_, otpProvider, __) {
+                              if (otpProvider.errorString() == null) {
+                                return Container();
+                              }
+
+                              return AlertText(otpProvider.errorString());
+                            },
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
                           InkWell(
                             child: Text(
                               "Tidak menerima OTP? Coba kirim otp lagi.",
@@ -101,40 +120,11 @@ class OTPScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Stack(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(15),
-                                child: Text(
-                                  "SUBMIT",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                width: 150,
-                                decoration: BoxDecoration(
-                                  color: CustomColor.redTheme.withAlpha(255),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(50)),
-                                ),
-                              ),
-                              Positioned.fill(
-                                child: Material(
-                                  color: Colors.transparent,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(50)),
-                                  child: InkWell(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                    splashColor: CustomColor.wewak,
-                                    onTap: () {
-                                      this.interface.submitOTP(context);
-                                    },
-                                  ),
-                                ),
-                              )
-                            ],
+                          Button(
+                            buttonText: "SUBMIT",
+                            onTap: () {
+                              this.interface.submitOTP(context);
+                            },
                           ),
                         ],
                       ),

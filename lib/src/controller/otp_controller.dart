@@ -22,7 +22,7 @@ class OTPController implements OTPInterface {
 
   Widget build(BuildContext context) {
     this._otpSerializer = ModalRoute.of(context).settings.arguments;
-    return Provider(
+    return ChangeNotifierProvider(
       create: (context) => OTPProvider(),
       child: OTPScreen(this),
     );
@@ -36,24 +36,20 @@ class OTPController implements OTPInterface {
     Scaffold.of(context).hideCurrentSnackBar();
 
     this._submitOTPLock.synchronized(() async {
+      if (this._submitOTPClicked) {
+        return;
+      } else {
+        this._submitOTPClicked = true;
+      }
+
+      OTPProvider otpProvider =
+          Provider.of<OTPProvider>(context, listen: false);
+
       try {
-        if (this._submitOTPClicked) {
-          return;
-        } else {
-          this._submitOTPClicked = true;
-        }
-
-        OTPProvider otpProvider =
-            Provider.of<OTPProvider>(context, listen: false);
-
         if (otpProvider.otpString().length < 4) {
-          Scaffold.of(context).showSnackBar(SnackBar(
-            content: Text("Kode OTP tidak valid"),
-          ));
+          otpProvider.setErrorString("Kode OTP tidak valid");
           return;
         }
-
-        print("OTP STRING: " + otpProvider.otpString());
 
         LoginSerializer loginSerializer = await this._api.auth().login(
               context,
@@ -69,19 +65,20 @@ class OTPController implements OTPInterface {
             Provider.of<AuthProvider>(context, listen: false);
         await authProvider.authorize(loginSerializer);
 
+        otpProvider.setErrorString("");
+
         Navigator.of(context).pushNamedAndRemoveUntil(
             '/timeline', (Route<dynamic> route) => false);
       } on APIException catch (e, backtrace) {
-        Scaffold.of(context).hideCurrentSnackBar();
-        Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text(e.error.firstError().detail),
-        ));
+        otpProvider.setErrorString(e.error.firstError().detail);
 
         print("API ERROR: " + e.toString());
         print("API STATUS CODE: " + e.statusCode.toString());
         print("DETAIL: " + e.error.firstError().detail);
         print("STACKTRACE: " + backtrace.toString());
       } catch (e, backtrace) {
+        otpProvider.setErrorString("Telah terjadi kesalahan pada aplikasi");
+
         print("ERROR: " + e.toString());
         print("STACKTRACE: " + backtrace.toString());
       } finally {
