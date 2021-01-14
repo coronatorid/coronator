@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 class Button extends StatelessWidget {
   final String buttonText;
   final double width;
-  final void Function() onTap;
+  final double fontSize;
+  final void Function(BuildContext context) onTap;
 
   Button({
     @required this.onTap,
     @required this.buttonText,
     this.width: 100,
+    this.fontSize: 14,
   });
 
   @override
@@ -17,12 +19,13 @@ class Button extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          padding: EdgeInsets.all(15),
+          padding: EdgeInsets.all(10),
           child: Text(
             this.buttonText,
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
+              fontSize: this.fontSize,
             ),
           ),
           width: this.width,
@@ -36,10 +39,11 @@ class Button extends StatelessWidget {
             color: CustomColor.redTheme,
             borderRadius: BorderRadius.all(Radius.circular(50)),
             child: InkWell(
-              borderRadius: BorderRadius.all(Radius.circular(50)),
-              splashColor: CustomColor.wewak,
-              onTap: this.onTap,
-            ),
+                borderRadius: BorderRadius.all(Radius.circular(50)),
+                splashColor: CustomColor.wewak,
+                onTap: () {
+                  this.onTap(context);
+                }),
           ),
         )
       ],

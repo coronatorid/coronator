@@ -7,7 +7,7 @@ class AlertText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return SelectableText(
       this.text,
       style: TextStyle(
         fontFamily: 'Hind',

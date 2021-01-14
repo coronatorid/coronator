@@ -51,7 +51,8 @@ class InitialScreen extends StatelessWidget {
                   ),
                   Button(
                     buttonText: "LOGIN",
-                    onTap: () => Navigator.of(context).pushNamed('/login'),
+                    onTap: (BuildContext context) =>
+                        Navigator.of(context).pushNamed('/login'),
                   ),
                   SizedBox(
                     height: 40,

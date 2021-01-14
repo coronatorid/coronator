@@ -122,7 +122,7 @@ class OTPScreen extends StatelessWidget {
                         children: [
                           Button(
                             buttonText: "SUBMIT",
-                            onTap: () {
+                            onTap: (BuildContext context) {
                               this.interface.submitOTP(context);
                             },
                           ),

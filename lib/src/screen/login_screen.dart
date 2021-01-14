@@ -94,7 +94,7 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       Button(
                         buttonText: "KIRIM OTP",
-                        onTap: () {
+                        onTap: (BuildContext context) {
                           this.interface.sendOtp(context);
                         },
                         width: 150,

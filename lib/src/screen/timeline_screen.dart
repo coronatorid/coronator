@@ -1,18 +1,45 @@
 import 'package:coronator/src/core/color.dart';
 import 'package:coronator/src/interface/timeline_interface.dart';
+import 'package:coronator/src/screen/component/base_dialog.dart';
+import 'package:coronator/src/screen/component/button.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class TimelineScreen extends StatelessWidget {
+class TimelineScreen extends StatelessWidget with BaseDialog {
   final TimelineInterface interface;
 
   TimelineScreen(this.interface);
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (await Permission.location.isGranted ||
+          await Permission.location.isDenied) {
+        return;
+      }
+
+      this.info(
+        context,
+        "Aplikasi ini mengumpulkan data lokasi Anda agar kami bisa memberitahu Anda jika bertemu dengan sesama pengguna yang terdeteksi positif covid-19, pengumpulan data akan tetap berjalan meskipun aplikasi ditutup jika diizinkan.\n\nAktifkan lokasi agar bisa berkontribusi bersama berperang melawan covid-19!",
+        confirmButton: Button(
+          buttonText: "Aktifkan",
+          width: 100,
+          onTap: (BuildContext context) async {
+            LocationPermission permission =
+                await Geolocator.requestPermission();
+            print(permission.toString());
+            Navigator.of(context).pop();
+          },
+          fontSize: 12,
+        ),
+      );
+    });
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       bottomNavigationBar: BottomAppBar(

@@ -2,6 +2,7 @@ import 'package:coronator/src/interface/timeline_interface.dart';
 import 'package:coronator/src/provider/auth_provider.dart';
 import 'package:coronator/src/screen/timeline_screen.dart';
 import 'package:flutter/widgets.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import 'package:synchronized/synchronized.dart';
 import 'package:workmanager/workmanager.dart';
