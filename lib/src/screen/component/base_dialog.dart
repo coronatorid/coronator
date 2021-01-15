@@ -8,6 +8,7 @@ class BaseDialog {
     Widget confirmButton,
   }) async {
     List<Widget> button = [];
+    List<Widget> bodyWidget = [];
 
     if (cancelButton != null) {
       button.add(cancelButton);
@@ -17,6 +18,19 @@ class BaseDialog {
       button.add(confirmButton);
     }
 
+    bodyWidget.add(Text(text));
+
+    if (button.length > 0) {
+      bodyWidget.add(SizedBox(
+        height: 50,
+      ));
+    }
+
+    bodyWidget.add(Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: button,
+    ));
+
     return showDialog<void>(
       context: context,
       barrierDismissible: true,
@@ -24,16 +38,7 @@ class BaseDialog {
         return AlertDialog(
           content: SingleChildScrollView(
             child: ListBody(
-              children: <Widget>[
-                Text(text),
-                SizedBox(
-                  height: 50,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: button,
-                ),
-              ],
+              children: bodyWidget,
             ),
           ),
         );
