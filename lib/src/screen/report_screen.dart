@@ -3,11 +3,12 @@ import 'dart:io';
 import 'package:coronator/src/core/color.dart';
 import 'package:coronator/src/interface/report_interface.dart';
 import 'package:coronator/src/provider/report_provider.dart';
+import 'package:coronator/src/screen/component/base_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
-class ReportScreen extends StatelessWidget {
+class ReportScreen extends StatelessWidget with BaseDialog {
   final ReportInterface interface;
 
   ReportScreen(this.interface);
@@ -143,7 +144,7 @@ class ReportScreen extends StatelessWidget {
                                 onTap: () async {
                                   if (await Permission.camera.isGranted ==
                                       false) {
-                                    this._showMyDialog(
+                                    this.info(
                                       context,
                                       'Akses untuk kamera harus diberikan untuk mengakses fitur ini',
                                     );
@@ -189,14 +190,14 @@ class ReportScreen extends StatelessWidget {
                                 onTap: () async {
                                   if (await Permission.camera.isGranted ==
                                       false) {
-                                    this._showMyDialog(
+                                    this.info(
                                       context,
                                       'Akses untuk kamera harus diberikan untuk mengakses fitur ini',
                                     );
                                   }
 
                                   if (reportProvider.file == null) {
-                                    this._showMyDialog(
+                                    this.info(
                                       context,
                                       'Harap lampirkan foto terlebih dahulu',
                                     );
@@ -286,7 +287,7 @@ class ReportScreen extends StatelessWidget {
                           splashColor: Colors.white,
                           onTap: () async {
                             await this.interface.removeReport(context);
-                            this._showMyDialog(
+                            this.info(
                               context,
                               'Laporan berhasil dihapus',
                             );
@@ -301,24 +302,6 @@ class ReportScreen extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  Future<void> _showMyDialog(BuildContext context, String text) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: true,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text(text),
-              ],
-            ),
-          ),
-        );
-      },
     );
   }
 
