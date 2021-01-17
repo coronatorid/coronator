@@ -1,7 +1,7 @@
 import 'package:coronator/src/core/color.dart';
-import 'package:coronator/src/interface/timeline_interface.dart';
 import 'package:coronator/src/screen/component/base_dialog.dart';
 import 'package:coronator/src/screen/component/button.dart';
+import 'package:coronator/src/screen/component/navigation_button.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,10 +11,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TimelineScreen extends StatelessWidget with BaseDialog {
-  final TimelineInterface interface;
-
-  TimelineScreen(this.interface);
-
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -51,58 +47,20 @@ class TimelineScreen extends StatelessWidget with BaseDialog {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              InkWell(
-                onTap: () {
+              NavigationButton(
+                onTap: (BuildContext context) {
                   Navigator.of(context).pushNamed("/report");
                 },
-                customBorder: CircleBorder(),
-                child: Column(
-                  children: [
-                    Container(
-                      height: 40,
-                      width: 40,
-                      padding: EdgeInsets.all(5),
-                      child: Image(
-                        image: AssetImage('assets/images/alarm.png'),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      "LAPOR \nPOSITIF COVID",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 8),
-                    )
-                  ],
-                ),
+                image: AssetImage('assets/images/alarm.png'),
+                text: "LAPOR \nPOSITIF COVID",
               ),
-              InkWell(
-                onTap: () async {
-                  await this.interface.tapLogout(context);
+              NavigationButton(
+                onTap: (BuildContext context) {
+                  Navigator.of(context).pushNamed("/setting");
                 },
-                customBorder: CircleBorder(),
-                child: Column(
-                  children: [
-                    Container(
-                      height: 40,
-                      width: 40,
-                      padding: EdgeInsets.all(5),
-                      child: Image(
-                        image: AssetImage('assets/images/logout.png'),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      "LOGOUT",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 8),
-                    )
-                  ],
-                ),
-              )
+                image: AssetImage('assets/images/technical-support.png'),
+                text: "SETTING",
+              ),
             ],
           ),
         ),
