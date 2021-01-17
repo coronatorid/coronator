@@ -1,4 +1,3 @@
-import 'package:coronator/src/core/color.dart';
 import 'package:coronator/src/screen/component/button.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
