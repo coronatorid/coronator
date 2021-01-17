@@ -113,6 +113,8 @@ class App extends StatelessWidget {
                 context,
               ),
           "/camera": (context) => CameraController().build(context),
+          "/setting": (context) => SettingController().build(context),
+          "/about": (context) => AboutController().build(context),
         },
       ),
     );
