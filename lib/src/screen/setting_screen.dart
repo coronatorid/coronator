@@ -113,6 +113,29 @@ class SettingScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+                    Divider(),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed("/about");
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: 20,
+                        ),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Tentang Aplikasi",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontFamily: "Hind",
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                     SizedBox(
                       height: 30,
                     ),
